@@ -5,7 +5,6 @@ function mypin() {
     return (
         <>
             <h1>mypin</h1>
-            <Nav/>
         </>
     )
 }

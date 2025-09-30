@@ -3,34 +3,52 @@ html, body, #root {
   width: 100%;
   margin: 0;
   padding: 0;
+  background: url("/src/img/pined_bg.png");
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: flex-start;
 }
 
 #root {
   display: grid;
-  padding-left:18px;
-  padding-right: 18px;
+  /* padding-left: 16px;
+  padding-right: 16px; */
   
-  gap: clamp(18px, 2vw, 22px);
+  gap: 8px;
   
-  /* 그리드 열을 유연하게 설정 'repeat(auto-fit, ...)'으로 열의 개수를 해상도에 맞춰 자동으로 조절*/
-  grid-template-columns: repeat(auto-fit, minmax(56px, 1fr)); 
-  background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  /* 그리드 열을 유연하게 설정 'repeat(auto-fit, ...)'으로 열의 개수를 해상도에 맞춰 자동으로 조절 */
+  grid-template-columns: repeat(auto-fit, 86px); 
 }
 
 /* 네비 바 스타일
 ----------------------------------------------------------------------------------------------- */
 .glass-card {
-  grid-column: 1 / span 5;
+  grid-column: 1 / -1;
+  /* grid-column: unset; */
+  position: fixed; 
+  width: 366px;
   height: 70px;
-  padding: 10px 30px;
   border-radius:35px; /* 모서리 둥글게 */
+  align-self: end;
+  z-index: 1000;
+  border-radius: 15px;
+  /* 핵심 글래스모피즘 속성 */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
-  /* 가운데 정렬 (선택 사항) */
+  /* 가운데 정렬 */
   display: flex;
   align-items: center;
   justify-self: center;
   text-align: center;
+  justify-content: space-evenly;
   font-family: Pretendard;
+  font-size: 15px;
   color: rgb(0, 0, 0); /* 텍스트 색상 */
 }
 
@@ -52,9 +70,8 @@ a:active {
 
 /*전체 박스 글래스 스타일
 ----------------------------------------------------------------------------------------------- */
-div {
+.glass {
   border-radius: 15px;
-
   /* 핵심 글래스모피즘 속성 */
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -71,22 +88,45 @@ div {
   box-shadow: none; /* 그림자를 제거합니다. */
 }
 
-/*홈페이지 링크
+/*페이지 상단 텍스트 스타일
 ----------------------------------------------------------------------------------------------- */
-.ex1{
-  grid-column: 1 / span 5;
+h1 {
+  grid-column: unset;
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  z-index: 1000;
+  justify-content: space-evenly;
+  color: #fff;
 }
 
-.ex2{
-  grid-column: 1 / span 3;
-  grid-row: span 2;
+/*핀드 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.top{
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.15); 
+    grid-column: 1 / -1;
 }
 
-.ex3{
-  grid-column: 4 / span 2;
-}
+.button {
+  display: flex;
+  /* justify-content: space-evenly; */
+  width: 100%;
+  height: 108px;
+  z-index: 1000;
+  overflow: auto;
+  scrollbar-width: none;
+  flex-direction: column-reverse;
+  flex-wrap: wrap;
+  align-content: start;  
 
-.ex4{
-  grid-column: 4 / span 2;
 }
-
+.button .profile {
+  display: inline;
+  margin: 15px;
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+  text-align: center;
+  background-color: gray;
+}
