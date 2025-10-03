@@ -25,10 +25,10 @@ html, body, #root {
 
 /* 네비 바 스타일
 ----------------------------------------------------------------------------------------------- */
-.glass-card {
+.glass-screen {
   grid-column: 1 / -1;
   /* grid-column: unset; */
-  position: fixed; 
+  position: relative; 
   width: 366px;
   height: 70px;
   border-radius:35px; /* 모서리 둥글게 */
@@ -42,31 +42,30 @@ html, body, #root {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 
   /* 가운데 정렬 */
-  display: flex;
+  /* display: flex;
   align-items: center;
   justify-self: center;
   text-align: center;
   justify-content: space-evenly;
   font-family: Pretendard;
   font-size: 15px;
-  color: rgb(0, 0, 0); /* 텍스트 색상 */
+  color: rgb(0, 0, 0); 텍스트 색상 */
 }
 
-a:link {
-  color: #ffffff; /* 방문하지 않은 링크: 파란색 */
+.glass-card {
+  display: flex;
+  direction: column;
+  gap: 2px;
+  height: 36px;
+  left: 44px;
+  position: absolute;
+  top:7px;
 }
 
-a:visited {
-  color: rgb(255, 255, 255); /* 방문한 링크: 회색 */
-}
-
-a:hover {
-  color: #ffc107; /* 마우스를 올렸을 때: 노란색 */
-}
-
-a:active {
-  color: #9135dc; /* 클릭하는 순간: 빨간색 */
-}
+/* a:link {color: #ffffff;}
+a:visited {color: rgb(255, 255, 255);}
+a:hover {color: #ffc107;}
+a:active {color: #9135dc;} */
 
 /*전체 박스 글래스 스타일
 ----------------------------------------------------------------------------------------------- */
@@ -130,3 +129,5 @@ h1 {
   text-align: center;
   background-color: gray;
 }
+
+
