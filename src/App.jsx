@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './style.css'
 import Nav from './nav.jsx'
 import Pined from './pined.jsx';
@@ -7,9 +7,6 @@ import Pinmap from './pinmap.jsx';
 import Pincreate from './pincreate.jsx';
 import Mypin from './mypin.jsx';
 import Pinggle from './pinggle.jsx';
-import { BrowserRouter } from 'react-router-dom';
-
-
 
 function App() {
   return(
