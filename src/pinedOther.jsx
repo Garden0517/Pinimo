@@ -32,17 +32,19 @@ function pinedOther () {
                             <div className="post-Introduction">서울을 사랑하는 사람</div>
                         </div>
                     </div>
-                    <div className="pinedOther-box">
-                        <img src={Other} style={{width: "337px", height: "246px"}}/>
-                        <div className="pinedOther-iconbox">
-                            <div style={{marginRight: "15px", display:"flex"}}><img src={Ex} style={{width: "24xp", height: "24px", marginRight: "10px"}}/>5,081</div>
-                            <div style={{marginRight: "15px", display:"flex"}}><img src={Ex} style={{width: "24xp", height: "24px", marginRight: "10px"}}/>68</div>
-                            <div style={{display:"flex"}}><img src={Ex} style={{width: "24xp", height: "24px", marginRight: "10px"}}/>35</div>
+                    <Link to="/pinpostOther">
+                        <div className="pinedOther-box">
+                            <img src={Other} style={{width: "337px", height: "246px"}}/>
+                            <div className="pinedOther-iconbox">
+                                <div style={{marginRight: "15px", display:"flex"}}><img src={Ex} style={{width: "24xp", height: "24px", marginRight: "10px"}}/>5,081</div>
+                                <div style={{marginRight: "15px", display:"flex"}}><img src={Ex} style={{width: "24xp", height: "24px", marginRight: "10px"}}/>68</div>
+                                <div style={{display:"flex"}}><img src={Ex} style={{width: "24xp", height: "24px", marginRight: "10px"}}/>35</div>
+                            </div>
+                            <div className="pinedOther-title">
+                                추워지기 전에 공원에서 피크닉!
+                            </div>
                         </div>
-                        <div className="pinedOther-title">
-                            추워지기 전에 공원에서 피크닉!
-                        </div>
-                    </div>
+                    </Link>
                 </div>
             </div>
         </>
