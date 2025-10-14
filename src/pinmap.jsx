@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import Map from "./img/map.png";
+import Arrow3 from "./img/arrow3.png"
 
 // 두 손가락 사이의 거리를 계산 (컴포넌트 외부에 유지)
 // 두 손가락 사이의 거리를 계산 (유클리드 거리)
@@ -20,18 +21,20 @@ const clampTranslation = (
     let newTranslate = currentTranslate;
     
     if (mapSize > containerSize) {
-        // 지도가 컨테이너보다 클 때만 경계 제한 적용
-        // 화면 밖으로 밀려날 수 있는 최대 거리
-        const maxTranslate = (mapSize - containerSize) / 2;
-        const minTranslate = -maxTranslate;
+        // 1. 최소 이동량 (minTranslate): 지도의 우측 끝이 컨테이너의 우측 끝에 닿았을 때의 값 (음수)
+        const minTranslate = -(mapSize - containerSize); 
         
-        // 이동량을 최소/최대값 범위 내로 제한
+        // 2. 최대 이동량 (maxTranslate): 지도의 좌측 끝이 컨테이너의 좌측 끝에 닿았을 때의 값 (0)
+        const maxTranslate = 0; 
+
+        // 3. 현재 이동량을 [minTranslate, maxTranslate] 범위 내로 제한
         newTranslate = Math.max(minTranslate, Math.min(maxTranslate, newTranslate));
+        
         
     } else {
         // 지도가 화면보다 작거나 같을 때 (최소 줌 레벨)
         // 지도를 컨테이너 중앙에 위치시킵니다.
-        newTranslate = (containerSize - mapSize) / 2;
+        newTranslate = 0;
     }
     return newTranslate;
 };
@@ -110,7 +113,7 @@ function Pinmap() {
                 const targetZoom = ref.initialZoom * scaleFactor; 
 
                 const MIN_ZOOM = 1.0;
-                const MAX_ZOOM = 2.0; // 최대 줌 레벨
+                const MAX_ZOOM = 1.5; // 최대 줌 레벨
                 const finalZoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, targetZoom));
                 
                 // 1. Z O O M  업데이트
@@ -184,8 +187,7 @@ function Pinmap() {
         <>
             <div 
                 className="pinmap-bg"
-                ref={containerRef} 
-            >
+                ref={containerRef}>
                 <img 
                     src={Map} 
                     style={{
@@ -195,6 +197,11 @@ function Pinmap() {
                         transformOrigin: '0 0', 
                     }}
                 />
+            </div>
+
+            <div className="pinmap-box">
+                <div className="rute-button">ON</div>
+                <div className="rute-button"><img src={Arrow3}/></div>
             </div>
         </>
     );
