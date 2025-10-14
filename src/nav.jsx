@@ -14,11 +14,11 @@ function Nav() {
       <div className='glass-screen'>
         <div className='glass-card'>
           <nav>
-            <Link to="/pined"><img src={PinedIcon} style={{width: '24px', height: '36px', paddingRight: '35px'}}/></Link>{" "}          
-            <Link to="/pinmap"><img src={PinmapIcon} style={{width: '24px', height: '36px', paddingRight: '35px'}}/></Link>{" "}
+            <Link to="/pined"><img src={PinedIcon} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}          
+            <Link to="/pinmap"><img src={PinmapIcon} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}
             <Link to="/pincreate"><img src={Pincreate} style={{width: '36px', height: '36px', paddingRight: '35px'}}/></Link>{" "}
-            <Link to="/mypin"><img src={Mypin} style={{width: '24px', height: '36px', paddingRight: '35px'}}/></Link>{" "}
-            <Link to="/pinggle"><img src={Pinggle} style={{width: '24px', height: '36px',}}/></Link>{" "}
+            <Link to="/mypin"><img src={Mypin} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}
+            <Link to="/pinggle"><img src={Pinggle} style={{width: '24px', height: '24px',}}/></Link>{" "}
           </nav>
         </div>
       </div>

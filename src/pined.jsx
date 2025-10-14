@@ -8,17 +8,24 @@ import PinedInfluencer from "./pinedInfluencer.jsx"
 import PinedAlcohol from "./pinedAlcohol.jsx"
 import PinedExercise from "./pinedExercise.jsx"
 
+
+
 function pined() {
     return (
         <>
             <PinedNav/>
             <Routes>
-                <Route path="pinedSecluded" element={<PinedSecluded />} />
-                <Route path="pinedExcellency" element={<PinedExcellency />} />
-                <Route path="pinedInfluencer" element={<PinedInfluencer />} />
-                <Route path="pinedAlcohol" element={<PinedAlcohol />} />
-                <Route path="pinedExercise" element={<PinedExercise />} />
+                <Route index element={<PinedInfluencer />} /> 
+
+                <Route path="/pinedSecluded" element={<PinedSecluded />} />
+                <Route path="/pinedExcellency" element={<PinedExcellency />} />
+                <Route path="/pinedInfluencer/*" element={<PinedInfluencer />} />
+                <Route path="/pinedAlcohol" element={<PinedAlcohol />} />
+                <Route path="/pinedExercise" element={<PinedExercise />} />
+
+
             </Routes>
+
         </>
     )
 }

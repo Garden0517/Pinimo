@@ -3,12 +3,13 @@ html, body, #root {
   width: 100%;
   margin: 0;
   padding: 0;
-  background-repeat: no-repeat;
+  background-color: #1F1F1F;;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-content: flex-start;
+  font-family: Pretendard;
 }
 
 /* 네비 바 스타일
@@ -16,7 +17,7 @@ html, body, #root {
 .glass-screen {
   position: fixed; 
   align-self: end;
-  margin-bottom: 34px;
+  margin-bottom: 35px;
   width: 360px;
   height: 50px;
   border-radius:100px; /* 모서리 둥글게 */
@@ -70,17 +71,16 @@ html, body, #root {
 
 .pined-scroll {
   width: 100%;
-  height: 108px;
+  height: 116px;
   overflow: auto;
   scrollbar-width: none;
-  margin-top: 68px;
-
+  margin-top: 60px;
 }
 
 .profile-group {
   display: flex;
   width: 482px;
-  height: 108px;
+  height: 116px;
   padding: 0 16px;
   gap: 28px;
   justify-content: space-between;
@@ -93,8 +93,9 @@ html, body, #root {
   width: 62px;
   height: 80px;
   font-size: 10px;
-  color: #fff;
-  align-items: center
+  color: #cecece;
+  align-items: center;
+  justify-content: center;
 }
 .profile img {
   width: 62px;
@@ -102,11 +103,37 @@ html, body, #root {
   margin-bottom: 10px;
 }
 
+.profile.active {
+  font-size: 10px;
+  color: #ffffff;
+}
+
+.profile.active img{
+  width: 80px;
+  height: 80px;
+  border: 5px solid dodgerblue;
+  border-radius: 100px;
+}
+
 .influencer-bg {
-  background: url('/src/img/pined_bg.png');
   width: 100%;
   height: 100%;
   position: relative;
+}
+
+.click-post {
+  display: flex;
+  width: 361px;
+  height: 660px;
+  margin-left: 16px;
+}
+
+.post-bg1{
+  position: absolute;
+  width: 100%;
+  height: 192px;
+  background-image:linear-gradient(to top,
+    rgba(4, 4, 4, 0.48), rgba(19, 19, 19, 0.48), rgba(7, 7, 7, 0.25), rgba(0, 0, 0, 0));
 }
 
 .post-bg{
@@ -134,29 +161,696 @@ html, body, #root {
 
 .post-font {
   display: flex;
+  height: 60px;
   color: #fff;
   flex-direction: column;
   margin-left: 12px;
   font-family: Pretendard;
+  padding: 0;
 }
 .post-title {
+  height: 33px;
   font-size: 28px;
   font-weight: 500;
 }
 
 .post-Introduction{
+  height: 18px;
   font-size: 15px;
   font-weight: 300;
+}
+
+.pinedOther-bg{
+  width: 393px;
+  height: 852px;
+}
+
+.pinedOther-black{
+  width: 393px;
+  height: 784px;
+  padding: 0;
+  background-image:linear-gradient(to bottom,
+    rgba(4, 4, 4, 0.0), rgba(7, 7, 7, 0.34), rgba(19, 19, 19, 0.92));
+}
+.pinedOther-top{
+  display: flex;
+  justify-content: space-between;
+  width: 241.77px;
+  margin-top: 68px;
+  margin-left: 16px;
+}
+
+.pinedOther-text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.pinedOther-rute{
+  display: flex;
+  width: 270px;
+  height: 171px;
+  margin-top: 24px;
+  margin-left: 61.5px;
+}
+
+.pinedOther-group{
+  display: flex;
+  margin-top: 24px;
+  margin-left: 16px;
+}
+
+.pinedOther-box{
+  display: flex;
+  flex-direction: column;
+  width: 335px;
+  height: 306px;
+  margin-top: 5.5px;
+  margin-left: 16px;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinedOther-iconbox{
+  display: flex;
+  align-items: center;
+  width: 208px;
+  height: 24px;
+  margin-top: 10px;
+  color:#fff;
+  font-size: 15px;
+}
+
+.pinedOther-title{
+  display: flex;
+  height: 18px;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 15px;
 }
 /*핀맵 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
 
 /*핀제작 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
+.create-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 393px;
+  height: 130px;
+}
 
+.title-box{
+  display: flex;
+  align-items: center; 
+  width: 361px;
+  height: 27px;
+  margin-top: 71px;
+  margin-left: 16px;
+}
+
+.next-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 27px;
+  font-size: 14px;
+  border-radius: 20px;
+  color: #1F1F1F;
+  background-color: #7FFF6C;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.next-button:visited {
+  color: #1F1F1F;
+}
+
+.x-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  margin-left: 130px;
+  color: #fff;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.under-box{
+  display: flex;
+  justify-content: space-between;
+  width: 393px;
+  margin-bottom: 4px;
+}
+
+.under-bar{
+  display: flex;
+  width: 115px;
+  border-bottom: 1px solid #fff;
+}
+
+.choice-img {
+  display: flex;
+  width: 326px;
+  height: 394px;
+  margin-top: 10px;
+  margin-left: 33.5px;
+  background-color: #1F1F1F;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-box{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: 497px;
+  padding: 12px 16px;
+  margin-top: 20px;
+  background-color: #1F1F1F;;
+}
+
+.img-text{
+  display: flex;
+  justify-content: space-between;
+  height: 26px;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.img-number{
+  display: flex;
+  width: 26px;
+  height: 26px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgEdit-box{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 360px;
+  margin-top: 42px;
+}
+
+.img-scroll {
+  display: flex;
+  width: 100%;
+  height: 360px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 8px;
+}
+
+.img-edit{
+  flex-shrink: 0;
+  display: flex;
+  width: 298px;
+  height: 360px;
+  margin: 0 8px;
+  background-color: #fff;
+}
+.create-box{
+  display: flex;
+  flex-direction: column;
+  width: 393px;
+  height: auto;
+  margin-top: 574px;
+  background-color: #1F1F1F;
+  z-index: 1000;
+}
+
+.ai-masking{
+  display: flex;
+  flex-direction: column;
+  width: 393px;
+  height: 130px;
+}
+
+.ai-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 361px;
+  height: 48px;
+  margin-top: 24px;
+  margin-left: 16px;
+  margin-bottom: 16px;
+}
+
+.ai-button{
+  display: flex;
+  width: 80px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  color: #fff;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-box{
+  display: flex;
+  flex-direction: column;
+  width: 393px;
+  padding-bottom: 54px;
+}
+
+.changetext-box{
+  display: flex;
+  width: 349px;
+  height: 74px;
+  margin-top: 24px;
+  margin-left: 16px;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.change-icon{
+  display: flex;
+  width: 17px;
+  height: 17px;
+  margin-top: 55px;
+  margin-left: 330px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 1500;
+}
+
+.face-first{
+  display: flex;
+  width: 115px;
+  height: 20px;
+  margin-top: 12px;
+  margin-left: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.face-second{
+  display: flex;
+  flex-direction: column;  
+  width: 361px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 16px;
+}
+
+.face-third{
+  display: flex;
+  flex-direction: column;  
+  width: 361px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 16px;
+}
+
+/* 컨테이너 */
+.slider-container {
+    position: relative;
+}
+
+/* 1. 실제 range input 숨기기 및 위치 조정 */
+.custom-range-input {
+    width: 100%;
+    position: absolute;
+    top: 50%; /* 시각적 트랙의 중앙에 위치 */
+    transform: translateY(-50%);
+    opacity: 0; /* 🌟 숨기기! 🌟 */
+    cursor: grab;
+    z-index: 10;
+}
+
+/* 2. 시각적인 트랙을 위한 래퍼 */
+.slider-track-wrapper {
+    position: relative;
+    height: 14px; /* 핸들 크기에 맞춤 */
+    display: flex;
+    align-items: center;
+}
+
+/* 3. 트랙 (선): 하얀색 2px */
+.slider-track {
+    width: 100%;
+    height: 2px; /* 🌟 2px 선 🌟 */
+    background-color: #fff; /* 🌟 하얀색 🌟 */
+    position: absolute;
+}
+
+/* 4. 핸들 (원형 버튼): #7FFF6C, 14px */
+.slider-handle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+    
+    width: 14px; /* 🌟 14px 🌟 */
+    height: 14px; /* 🌟 14px 🌟 */
+    border-radius: 50%;
+    background-color: #7FFF6C; /* 🌟 요청 색상 🌟 */
+    
+    z-index: 5;
+    pointer-events: none; /* 핸들 위로 마우스 이벤트를 통과시켜 input을 조작할 수 있게 함 */
+}
+
+.bg-button{
+  display: flex;
+  flex-direction: column;  
+  width: 361px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 16px;
+}
+
+.brand-box{
+  display: flex;
+  justify-content: space-between;
+  width: 361px;
+  height: 30px;
+  margin-top: 12px;
+  margin-left: 16px;
+}
+
+.brand-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 30px;
+  padding: 0 12px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.createText-box{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  padding: 17px 0;
+
+}
+
+.textbox-glass{
+  display: flex;
+  align-items: center;
+  width: 361px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.createText-box2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 361px;
+  height: 26px;
+  padding: 17px 0;
+}
+
+.create-icon{
+  display: flex;
+  width: 23px;
+  height: 23px;
+  border-radius: 20px;
+  background: #D9D9D9;
+}
+
+.platfom{
+  display: flex;
+  flex-direction: column;
+  width: 49px;
+  height: 85px;
+}
 /*마이핀 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
+.mypin-bg{
+  width: 100%;
+  height: 100%;
+}
 
+.mypin-dial {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height:100%;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mypintop-text{
+  display: flex;
+  font-family: Pretendard;
+  color: #fff;
+  width: 361px;
+  font-size: 36px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 104px;
+}
+
+.dial-box {
+  display: flex;
+  position: absolute;
+  width: 500px; 
+  height: 500px;
+  margin-top: 630px;
+  border-radius: 250px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.dial-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.05s ease-out; 
+}
+
+.dial-number:active {
+  cursor: grabbing;
+}
+
+.dial-tick-number {
+    /* 눈금 요소를 dial-number 중앙에 배치하기 위한 설정 */
+    position: absolute;
+    top: 50%; /* dial-number의 중앙 수직선 */
+    left: 50%; /* dial-number의 중앙 수평선 */
+    
+    /* 자체 크기 조정 */
+    width: 20px;
+    height: 20px;
+    margin-left: -10px; /* 중앙 정렬을 위해 너비의 절반만큼 이동 */
+    margin-top: -10px; /* 중앙 정렬을 위해 높이의 절반만큼 이동 */
+    
+    transform-origin: 50% 50%; 
+
+    /* 숫자 스타일 */
+    font-family: Pretendard;
+    font-size: 18pt;
+    font-weight: 500;
+    color: #fff;
+    text-align: center;
+    line-height: 90px; /* 수직 중앙 정렬 */
+}
+
+.dial-tick-line {
+    position: absolute;
+    top: 50%; /* 중앙 배치 시작 */
+    left: 50%;
+    
+    /* 눈금 막대의 크기 */
+    width: 2px; /* 얇은 막대 */
+    height: 12px; /* 길이 */
+    border-radius: 50%;
+    
+    /* 막대의 색상 및 정렬 */
+    background-color: #fff; /* 흰색으로 설정 */
+    
+    /* 중앙 정렬: 너비/높이의 절반만큼 이동 */
+    margin-left: -1px; /* width 2px의 절반 */
+    margin-top: -10px; /* height 10px만큼 위로 이동하여 눈금처럼 보이게 조정 */
+    
+    /* 눈금 막대도 중앙을 기준으로 회전해야 함 */
+    transform-origin: 50% 50%; 
+}
+
+.dial-tick-line.major-tick {
+    width: 3px;
+    height: 22px;
+    border-radius: 20%;
+}
+
+/*핀포스트 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.pinpost-bg {
+  width: 100%;
+  height: auto;
+}
+
+.bg-black{
+  width: 100%;
+  height: 852px;
+  background-image:linear-gradient(to bottom,
+    rgba(4, 4, 4, 0.0), rgba(7, 7, 7, 0.34), rgba(19, 19, 19, 0.92));
+}
+
+.pinpost-top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 68px;
+  margin-left: 16px;
+  width: 361px;
+  height: 30px;
+}
+
+.profileEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 87px;
+  height: 30px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 22px 0 rgba(0, 0, 0, 0.1);
+}
+
+.rute-box {
+  display: flex;
+  justify-content: center;
+  width: 361px;
+  height: 198px;
+  margin-top: 18px;
+  margin-left: 16px;
+}
+
+.date-box{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  margin-top: 18px;
+  margin-left: 16px;
+}
+
+.date-first{
+  display: flex;
+  align-items: center;
+  width: 154px;
+  height: 33px;
+  font-size: 28px;
+  color: #fff; 
+}
+
+.date-heart{
+  display: flex;
+  align-items: center;
+  margin-left: 157px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.date-sceond{
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  color: #A6A6A6; 
+}
+
+.pinpost-text{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: 220px;
+  margin-top: 12px;
+  margin-left: 16px;
+  color: #fff;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinpost-location{
+display: flex;
+color: #fff;
+font-size: 20px;
+}
+
+.pinpost-hashtagbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #fff;
+}
+
+.pinpost-hashtag{
+  display: flex;
+  width: 115px;
+  height: 47px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
 /*핀끌 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
 .pinggle-bg{
@@ -182,6 +876,7 @@ html, body, #root {
   left: 315px;
   top: 92px
 }
+
 .bgicon, .editicon {
   display: flex;
   width: 42px;
@@ -193,4 +888,264 @@ html, body, #root {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   justify-content: center;
   align-items: center;
+}
+
+.character-box {
+ display: flex;
+ width: 264px;
+ height: 322px;
+ margin-top: 162px;
+ margin-left: 64.5px;
+}
+
+.pinggle-profile{
+  display: flex;
+  position: absolute;
+  top: 92px;
+  left: 16px;
+}
+
+/*프로필 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+/*공통*/
+
+.profile-bg {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-top {
+  display: flex;
+  width: 361px;
+  height: 32px;
+  margin-top: 76px;
+  margin-left: 16px;
+  justify-content: space-between;
+}
+
+.peed-detail{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 37px 30px;
+  width: 333px;
+  height: 248px;
+  margin-top: 422px;
+  border-radius:  30px 30px 0px 0px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 1000;
+}
+
+.profile-first {
+  display: flex;
+  width: 361px;
+  height: 113px;
+  margin-left: 16px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+
+.friend-box {
+  display: flex;
+  width: 90px;
+  height: 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  margin-bottom: 2px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.friend-peed{
+  display: flex;
+  width: 76px;
+  height: 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-left: 172px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-size: 12px;
+  color: #fff;
+}
+
+.profile-peed{
+  display: flex;
+  width: 90px;
+  height: 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-left: 158px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-size: 12px;
+  color: #fff;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: 188px;
+  margin-left: 16px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-family: Pretendard;
+
+}
+
+.text-first {
+  display: flex;
+  margin-top:20px;
+  margin-left: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.text-second {
+  display: flex;
+  margin-top: 4px;
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(238, 235, 235, 0.5);
+
+}
+
+.text-third {
+  display: flex;
+  margin-top: 24px;
+  margin-left:20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.profile-iconbox{
+  display: flex;
+  width: 321px;
+  height: 21px;
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+.profile-icon {
+  display: flex;
+  color: #fff;
+  font-family: Pretendard;
+  margin-right: 25px;
+}
+
+.hidden-radio {
+  /* 접근성을 유지하며 시각적으로만 숨깁니다. */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  /* 키보드 포커스가 가능하게 하려면, 완전히 display: none은 피해야 합니다. */
+}
+
+/* 2. 커스텀 라벨 기본 스타일 */
+.custom-radio-label {
+  display: inline-block;
+  padding-left: 40px; /* 커스텀 원이 들어갈 공간 확보 */
+  position: relative;
+  cursor: pointer;
+  user-select: none; /* 텍스트 선택 방지 */
+  color: #fff;
+  font-size: 20px;
+}
+
+/* 3. ::before 가상 요소: 바깥 원(테두리) 역할 */
+.custom-radio-label::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 50%; /* 원형 모양 */
+  
+  /* label 왼쪽의 원하는 위치에 배치 */
+  position: absolute; 
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+/* 4. ::after 가상 요소: 내부 점(dot) 역할 */
+.custom-radio-label::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #7FFF6C;
+  box-shadow: inset 1px 1px 1px 1px rgba(255, 192, 192, 0.3), inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+  /* ::before (바깥 원) 중앙에 배치 */
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  
+  /* 기본적으로는 숨기고, scale을 0으로 설정하여 사라지게 합니다. */
+  transform: translateY(-50%) scale(0);
+}
+
+/* 내부 점 스타일 변경 (체크 시 보이게 scale을 1로 변경) */
+.hidden-radio:checked + .custom-radio-label::after {
+  transform: translateY(-50%) scale(1); /* 크기를 키워서 보이게 함 */
+}
+
+.three-box {
+  display: flex;
+  justify-content: space-between;
+  width: 361px;
+  height: 80px;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+.min-box{
+  display: flex;
+  flex-direction: column;
+  width: 115px;
+  height: 80px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.min-icon{
+  display: flex;
+  margin-top: 18px;
+  margin-left: 15px;
+  width: 93px;
+  height: 24px;
 }
