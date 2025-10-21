@@ -1,6 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
 import Map from "./img/map.png";
 import Arrow3 from "./img/arrow3.png"
+import Plus from "./img/plusIcon.png"
+
+import Img1 from "./img/pinmapimg1.png"
+import Img2 from "./img/pinmapimg2.png"
+import Img3 from "./img/pinmapimg3.png"
+
+import Icon from "./img/heart.png"
 
 // 두 손가락 사이의 거리를 계산 (컴포넌트 외부에 유지)
 // 두 손가락 사이의 거리를 계산 (유클리드 거리)
@@ -202,6 +209,58 @@ function Pinmap() {
             <div className="pinmap-box">
                 <div className="rute-button">ON</div>
                 <div className="rute-button"><img src={Arrow3}/></div>
+            </div>
+
+            <div className="pinmap-under">
+                <div style={{display:"flex", flexDirection:"column", width:"361px", height:"56px",}}>
+                    <div style={{fontSize:"20px", color:"#fff"}}>다양한 장소와 발자취를 공유해보세요</div>
+                    <div style={{fontSize:"12px", color:"#fff", marginTop:"10px"}}>나의 취향에 맞는 경로와 장소를 찾아보세요</div>
+                </div>
+
+                <div style={{display:"flex", padding:"16px 0", width:"361px", justifyContent: "space-between"}}>
+                    <div className="pinmap-keyword">좋아요 Top 10</div>
+                    <div className="pinmap-keyword">추천장소</div>
+                    <div className="pinmap-keyword">유형별 안내</div>
+                    <div className="pinmap-keyword">아이템</div>
+                    <div className="pinmap-keyword"><img src={Plus} style={{width: "15px", height: "15px"}}/></div>
+                </div>
+
+                <div style={{display:"flex", flexDirection:"column", width:"361px", height:"56px", marginTop:"10px"}}>
+                    <div style={{fontSize:"20px", color:"#fff"}}>좋아요 TOP 10</div>
+                    <div style={{fontSize:"12px", color:"#fff", marginTop:"10px"}}>사람들이 가장 좋아하는 장소에요</div>
+                </div>
+
+                <div style={{display:"flex", marginTop:"16px", width:"361px", justifyContent: "space-between"}}>
+                    <div style={{width:"108px", height:"152px", position:"relative"}}>
+                        <div className="rute-button" style={{width:"21px", height:"21px", zIndex:"500", position:"absolute"}}>1</div>
+                        <img src={Img1} style={{margin:"7px 0 0 5px"}}/>
+                        <div style={{fontSize:"14px", color:"#fff", height:"20px", margin:"8px 0 0 5px"}}>서울 숲 공원</div>
+                        <div style={{height: "14px", margin:"4px 0 0 5px", display:"flex",flexDirection:"row", alignItems: "center"}}>
+                            <img src={Icon} style={{width:"14px", height:"14px", opacity:"50%"}}/>
+                            <div style={{fontSize:"14px", color:"#989898", marginLeft:"4px"}}>108</div>
+                        </div>
+                    </div>
+
+                    <div style={{width:"108px", height:"152px", position:"relative"}}>
+                        <div className="rute-button" style={{width:"21px", height:"21px", zIndex:"500", position:"absolute"}}>2</div>
+                        <img src={Img2} style={{margin:"7px 0 0 5px"}}/>
+                        <div style={{fontSize:"14px", color:"#fff", height:"20px", margin:"8px 0 0 5px"}}>차이들</div>
+                        <div style={{height: "14px", margin:"4px 0 0 5px", display:"flex",flexDirection:"row", alignItems: "center"}}>
+                            <img src={Icon} style={{width:"14px", height:"14px", opacity:"50%"}}/>
+                            <div style={{fontSize:"14px", color:"#989898", marginLeft:"4px"}}>108</div>
+                        </div>
+                    </div>
+
+                    <div style={{width:"108px", height:"152px", position:"relative"}}>
+                        <div className="rute-button" style={{width:"21px", height:"21px", zIndex:"500", position:"absolute"}}>3</div>
+                        <img src={Img3} style={{margin:"7px 0 0 5px"}}/>
+                        <div style={{fontSize:"14px", color:"#fff", height:"20px", margin:"8px 0 0 5px"}}>엠플레이그라운드</div>
+                        <div style={{height: "14px", margin:"4px 0 0 5px", display:"flex",flexDirection:"row", alignItems: "center"}}>
+                            <img src={Icon} style={{width:"14px", height:"14px", opacity:"50%"}}/>
+                            <div style={{fontSize:"14px", color:"#989898", marginLeft:"4px"}}>108</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

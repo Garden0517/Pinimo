@@ -1,22 +1,24 @@
 import React from "react";
-import BgIcon from "./img/bgIcon.png";
-import EditIcon from "./img/editIcon.png";
+
 import {Link } from 'react-router-dom';
 import { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { OrbitControls, Environment } from '@react-three/drei';
-import Alcohol from './Alcohol.jsx';
 
-import Profile from './img/influencer.png'
+import Alcohol from './Alcohol.jsx';
+import Profile from './img/profile.png'
+
+import BgIcon from "./img/bgIcon.png";
+import EditIcon from "./img/editIcon.png";
 
 function Pinggle() {
     return (
         <>
             <div className="pinggle-bg">
                 <div className="top-bg">
-                    <div className="pinggle-profile"><Link to='/pinprofile'><img src={Profile}/></Link></div>
+                    <Link to='/pinprofile'><div className="pinggle-profile"><img src={Profile}/></div></Link>
                     <div className="icongroup">
-                        <div className="bgicon"><img src={BgIcon} /></div>
+                        <Link to='/pinggleBg'><div className="bgicon"><img src={BgIcon} /></div></Link>
                         <div className="editicon"><img src={EditIcon} /></div>
                     </div>
                 </div>

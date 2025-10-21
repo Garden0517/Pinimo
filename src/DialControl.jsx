@@ -1,4 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import {Link } from 'react-router-dom';
+
+import Sun from "./img/sunIcon.png"
+import Rain from "./img/rainIcon.png"
+import Cloud from "./img/cloudIcon.png"
+import Blur from "./img/blurIcon.png"
+
+import All from "./img/allIcon.png"
 
 /**
  * Custom hook logic (formerly useDialLogic.js)
@@ -168,12 +176,67 @@ export default function DialControl({ onValueChange }) {
   const totalTicks = 30;
   const tickNumbers = Array.from({ length: totalTicks + 1 }, (_, i) => i);
 
+  // 1. 요일 배열 정의
+  const dateArray = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
+
+  // 2. 다이얼의 value (1~30)를 요일 인덱스 (0~6)로 변환
+  // value가 1부터 시작하므로 (value - 1)을 한 후, 배열 길이(7)로 나눈 나머지를 사용합니다.
+  const dayIndex = (value - 1) % dateArray.length; 
+  
+  // 3. 현재 요일 가져오기
+  const currentDay = dateArray[dayIndex];
+  // ✅ 사용자 요청 사항 추가 끝
+
+  // 1. 이미지 배열 정의 (⚠️ 실제 이미지 경로나 import된 변수로 대체해야 함)
+  const weatherImages = [
+      // 여기서 Sun 이미지가 0번 인덱스에 오도록 순서를 맞추는 것이 좋습니다.
+      Sun, // 임시로 문자열 사용. 실제로는 import된 Sun 변수를 넣어야 합니다.
+      Rain, 
+      Cloud, 
+      Blur
+  ];
+  
+  // 2. 현재 이미지 상태 관리
+  const [currentImage, setCurrentImage] = useState(null);
+  const isFirstLoad = useRef(true); // 첫 로드 여부를 추적
+
+  // 3. 컴포넌트 마운트 시 Sun으로 설정하고, 이후에는 랜덤하게 설정
+  useEffect(() => {
+    // 1. value가 1일 때는 무조건 Sun 이미지로 고정
+    if (value === 1) {
+        setCurrentImage(weatherImages[0]); // weatherImages[0]은 Sun 이미지입니다.
+        isFirstLoad.current = false; // 첫 로드 상태를 한 번은 해제
+        return;
+    }
+    
+    // 2. 그 외의 경우 (value가 2부터 30일 때)
+    if (!isFirstLoad.current) {
+        // value가 1이 아니며, 첫 로드 이후라면 랜덤 이미지 선택
+        const randomIndex = Math.floor(Math.random() * weatherImages.length);
+        setCurrentImage(weatherImages[randomIndex]);
+    }
+
+    // 💡 참고: 첫 렌더링 시 useState(Sun)에 의해 이미 Sun이 표시되므로, 
+    // isFirstLoad 플래그를 이용한 복잡한 처리는 value=1 조건으로 대체되었습니다.
+    
+  }, [value]); // value가 변경될 때마다 실행하여 이미지를 업데이트
+
   return (
     <div className="mypin-dial">
       
       {/* 상단 날짜값 */}
-      <div className='mypintop-text'>2025.09.{value}</div>
+      <div className='mypintop-text'>2025.09.{value}
+        <img 
+          src={currentImage}
+          alt={Sun}
+          style={{ width: '36px', height: '36px', marginLeft: '12px' }} // 적절한 스타일 추가
+        />
 
+        <div style={{position:"fixed", marginLeft:"325px", zIndex:"1000"}}>
+          <Link to="/mypinAll"><img src={All} style={{width: '36px', height: '36px'}}/></Link>
+        </div>
+      </div>
+      <div className='mypintop-date'>{currentDay}</div>
         {/* 1. 다이얼 컨테이너 */}
         <div className="dial-box">
 

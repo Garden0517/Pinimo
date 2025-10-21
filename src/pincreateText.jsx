@@ -13,22 +13,26 @@ function PincreateText() {
     const [selectedPlatforms, setSelectedPlatforms] = useState([]); 
 
     const handleCheckboxChange = (event) => {
-    const { value, checked } = event.target; // 현재 체크박스의 값과 체크 상태를 가져옴
-    
-    setSelectedPlatforms(prev => {
-        if (checked) {
-            // ✅ 체크된 경우: 기존 배열에 새 값(value)을 추가
-            return [...prev, value];
-        } else {
-            // ❌ 체크 해제된 경우: 기존 배열에서 해당 값(value)을 제거
-            return prev.filter(platform => platform !== value);
-        }
-    });
-};
+        const { value, checked } = event.target; // 현재 체크박스의 값과 체크 상태를 가져옴
+        
+        setSelectedPlatforms(prev => {
+            if (checked) {
+                // ✅ 체크된 경우: 기존 배열에 새 값(value)을 추가
+                return [...prev, value];
+            } else {
+                // ❌ 체크 해제된 경우: 기존 배열에서 해당 값(value)을 제거
+                return prev.filter(platform => platform !== value);
+            }
+        });
+    };
+
+    const [text, setText] = useState('');
+    const [text1, setText1] = useState('');
+    const [text2, setText2] = useState('');
 
     return (
         <>
-        <div style={{height: "130px", position: "fixed", backgroundColor:"#1F1F1F", zIndex:"1000"}}>
+        <div style={{height: "130px", position: "fixed", backgroundColor:"#1F1F1F", zIndex:"2000"}}>
             <div className="create-top">
                 <div className="title-box">
                     <div><Link to='/pincreateEdit'><img src={Arrow}/></Link></div>
@@ -45,12 +49,36 @@ function PincreateText() {
 
         <div className="createText-box" style={{height:"76px", marginTop:"147px"}}>
             <div style={{fontSize:"20px", color:"#fff"}}>게시물 제목을 입력하세요</div>
-            <div className="textbox-glass" style={{height:"38px"}}></div>
+                <textarea
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    placeholder=" 제목을 입력하세요"
+                    className="textbox-glass" 
+                    style={{
+                        // 내부 텍스트 스타일
+                        fontFamily: 'Inter, pretentard',
+                        lineHeight: '1.5',
+                        height:"38px",
+                        color:"#fff",
+                    }}
+                />
         </div>
 
         <div className="createText-box" style={{height:"240px"}}>
             <div style={{fontSize:"20px", color:"#fff"}}>내용을 입력하세요</div>
-            <div className="textbox-glass" style={{height:"210px"}}></div>
+            <textarea
+                value={text1}
+                onChange={(e) => setText1(e.target.value)}
+                placeholder=" 핀드에 올릴 게시물의 내용을 작성해주세요"
+                className="textbox-glass" 
+                style={{
+                    // 내부 텍스트 스타일
+                    fontFamily: 'Inter, pretentard',
+                    lineHeight: '1.5',
+                    height:"210px",
+                    color:"#fff",
+                }}
+            />
         </div>
         
         <div className="createText-box" style={{height:"94px"}}>
@@ -68,7 +96,19 @@ function PincreateText() {
 
         <div className="createText-box" style={{height:"100px"}}>
             <div style={{fontSize:"20px", color:"#fff"}}>원하는 태그를 추가하세요</div>
-            <div className="textbox-glass" style={{height:"38px"}}></div>
+            <textarea
+                value={text2}
+                onChange={(e) => setText2(e.target.value)}
+                placeholder=" 태그를 입력하세요"
+                className="textbox-glass" 
+                style={{
+                    // 내부 텍스트 스타일
+                    fontFamily: 'Inter, pretentard',
+                    lineHeight: '1.5',
+                    height:"38px",
+                    color:"#fff",
+                }}
+            />
             <div style={{display:"flex", flexDirection:"row", justifyContent: "space-between"}}>
                 <div className="textbox-glass" style={{height:"24px", width: "auto", padding:"0 10px", fontSize:"12px", color:"white"}}>#인스타맛집</div>
                 <div className="textbox-glass" style={{height:"24px", width: "auto", padding:"0 10px", fontSize:"12px", color:"white"}}>#셀카찍기좋은카페</div>
@@ -171,7 +211,7 @@ function PincreateText() {
             </div>
         </div>
 
-        <Link to='/pincreateFinal'><div className="next-button" style={{marginTop:"17px",marginLeft:"319px", marginBottom:"120px"}}>다음 <img src={Arrow2} style={{width: "12px", height: "12px", marginLeft: "3px"}}/></div></Link>
+        <Link to='/pincreateFinal' style={{zIndex:"1500", backgroundColor:"#1F1F1F"}}><div className="next-button" style={{marginTop:"17px",marginLeft:"319px", marginBottom:"50px"}}>다음 <img src={Arrow2} style={{width: "12px", height: "12px", marginLeft: "3px"}}/></div></Link>
         </>
     )
 }

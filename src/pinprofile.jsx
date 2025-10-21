@@ -1,4 +1,5 @@
 import React from "react";
+import {Link } from 'react-router-dom'; 
 
 import Bg from "./img/profileOther.png"
 
@@ -51,18 +52,24 @@ function pinprofile() {
                     </div>
                 </div>
                 <div className="three-box">
-                    <div className="min-box">
-                        <div className="min-icon"><img src={Img1}/><img src={Arrow} style={{marginLeft:"45px", transform: "scaleX(-1)"}}/></div>
-                        <div style={{marginLeft:"15px", marginTop: "9px", fontSize:"14px", color:"#fff"}}>친구목록</div>
-                    </div>
-                    <div className="min-box">
-                        <div className="min-icon"><img src={Img2}/><img src={Arrow} style={{marginLeft:"45px", transform: "scaleX(-1)"}}/></div>
-                        <div style={{marginLeft:"15px", marginTop: "9px", fontSize:"14px", color:"#fff"}}>그룹관리</div>
-                    </div>
-                    <div className="min-box">
-                        <div className="min-icon"><img src={Img3}/><img src={Arrow} style={{marginLeft:"45px", transform: "scaleX(-1)"}}/></div>
-                        <div style={{marginLeft:"15px", marginTop: "9px", fontSize:"14px", color:"#fff"}}>환경설정</div>
-                    </div>
+                    <Link to="/friend">
+                        <div className="min-box">
+                            <div className="min-icon"><img src={Img1}/><img src={Arrow} style={{marginLeft:"45px", transform: "scaleX(-1)"}}/></div>
+                            <div style={{marginLeft:"15px", marginTop: "9px", fontSize:"14px", color:"#fff"}}>친구목록</div>
+                        </div>
+                    </Link>
+                    <Link to="/group">
+                        <div className="min-box">
+                            <div className="min-icon"><img src={Img2}/><img src={Arrow} style={{marginLeft:"45px", transform: "scaleX(-1)"}}/></div>
+                            <div style={{marginLeft:"15px", marginTop: "9px", fontSize:"14px", color:"#fff"}}>그룹관리</div>
+                        </div>
+                    </Link>
+                    <Link to='/setting'>
+                        <div className="min-box">
+                            <div className="min-icon"><img src={Img3}/><img src={Arrow} style={{marginLeft:"45px", transform: "scaleX(-1)"}}/></div>
+                            <div style={{marginLeft:"15px", marginTop: "9px", fontSize:"14px", color:"#fff"}}>환경설정</div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         </>

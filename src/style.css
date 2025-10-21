@@ -304,6 +304,35 @@ html, body, #root {
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
+.pinmap-under{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: auto;
+  padding: 48px 16px;
+  z-index: 999;
+  border-radius: 20px 20px 0px 0px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinmap-keyword{
+  display: flex;
+  align-items: center;
+  width: auto;
+  height: 22px;
+  padding: 0 12px;
+  font-size: 10px;
+  color: #fff;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
 /*핀제작 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
 .create-top {
@@ -633,7 +662,8 @@ html, body, #root {
   flex-direction: column;
   width: 361px;
   padding: 17px 0;
-
+  z-index: 1500;
+  background-color: #1F1F1F;
 }
 
 .textbox-glass{
@@ -655,6 +685,8 @@ html, body, #root {
   width: 361px;
   height: 26px;
   padding: 17px 0;
+  z-index: 1500;
+  background-color: #1F1F1F;
 }
 
 .create-icon{
@@ -671,6 +703,62 @@ html, body, #root {
   width: 49px;
   height: 85px;
 }
+
+.glass-change {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 2000;
+}
+
+.edit-glass{
+  display: flex;
+  align-items: center;
+  width: 337px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow: hidden;
+  scrollbar-color: rgb(255, 255, 255) rgba(255, 255, 255, 0.2);
+  scrollbar-width: inherit;
+}
+
+.edit-in {
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  width: 496px;
+  height: 149px;
+  padding-bottom: 8px
+}
+
+.upload-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 361px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #7FFF6C;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+a:visited {
+  color: #000;
+}
+
 /*마이핀 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
 .mypin-bg{
@@ -690,13 +778,27 @@ html, body, #root {
 
 .mypintop-text{
   display: flex;
+  align-items: center;
   font-family: Pretendard;
   color: #fff;
+  font-weight: 300;
   width: 361px;
   font-size: 36px;
   margin-left: 16px;
   margin-right: 16px;
   margin-top: 104px;
+  height: 36px;
+}
+
+.mypintop-date{
+  display: flex;
+  font-family: Pretendard;
+  color: #ECECEC;
+  font-weight: 300;
+  width: 361px;
+  font-size: 36px;
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .dial-box {
@@ -899,10 +1001,66 @@ font-size: 20px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
+
+.mypin-all{
+  display: flex;
+  align-items: center;
+  margin-top: 64px;
+  margin-left: 16px;
+  width: 361px;
+  height: 34px;
+}
+
+.mypin-allbox{
+  display: flex;
+  justify-content: space-between;
+  width: 361px;
+  height: auto;
+  padding-bottom: 12px;
+}
+
+.mypin-box{
+  display: flex;
+  position: relative;
+  width: 176px;
+  height: 176px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.mypin-box img {
+  width: 100%; /* 부모의 가로 길이를 채웁니다. */
+  height: 100%; /* 부모의 세로 길이를 채웁니다. */
+  object-fit: cover; /* 이미지가 잘리더라도 부모 영역을 모두 덮도록 조정 */
+}
+
+.mypin-alldate{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 24px;
+  margin-top: 10px;
+  margin-left: 89px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.17);
+}
 /*핀끌 페이지 스타일
 ----------------------------------------------------------------------------------------------- */
 .pinggle-bg{
   background: url("/src/img/pinggle_bg.png");
+  width: 100%;
+  height: 100%;
+}
+
+.pinggleBg-bg{
+  background: url("/src/img/pinggle/influencer_box.png");
   width: 100%;
   height: 100%;
 }
@@ -951,6 +1109,34 @@ font-size: 20px;
   position: absolute;
   top: 92px;
   left: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  justify-content: center;
+  align-items: center;
+}
+
+.pinggle-itembox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 329px;
+  height: 145px;
+  padding: 0 16px;
+  margin-top: 48px;
+  margin-left: 16px;
+}
+
+.pinggle-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 155px;
+  height: 145px;
 }
 
 /*프로필 페이지 스타일
@@ -1196,4 +1382,90 @@ font-size: 20px;
   margin-left: 15px;
   width: 93px;
   height: 24px;
+}
+
+.friend-title {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  height: auto;
+  width: 120px;
+  margin-left: 97px;
+}
+
+.friend-topbutton{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 84px;
+  height: 38px;
+  margin-left: 36px;
+}
+
+.friend-name{
+  display: flex;
+  width: 60px;
+  height: auto;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.circle-big{
+  display:flex;
+  position:relative;
+  align-items:center;
+  justify-content: center;
+  width:12px;
+  height:12px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.circle-small{
+  position:absolute;
+  width:8px;
+  height:8px; 
+  border-radius:8px
+}
+
+.condition{
+  display: flex;
+  width: 45px;
+  height: auto;
+  font-size: 12px;
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.left-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 58px;
+  height: 60px;
+  background-color: #7FFF6C;
+  border-radius: 0 8px 8px 0px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.right-box{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 60px;
+  color: #fff;
+  border-radius: 8px 0 0px 8px;
+  font-size: 16px;
+  font-weight: 500;
 }

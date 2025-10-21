@@ -16,6 +16,13 @@ import PinedOther from "./pinedOther.jsx"
 import PincreateEdit from "./pincreateEdit.jsx"
 import PincreateText from "./pincreateText.jsx"
 import PincreateFinal from "./pincreateFinal.jsx"
+import MypinAll from "./mypinAll.jsx"
+import Friend from "./friend.jsx"
+import Group from "./group.jsx"
+import AddGroupMembers from './AddGroupMembers.jsx';
+import CreateGroup from "./CreateGroup.jsx"
+import Seeting from "./setting.jsx"
+import PinggleBg from "./pinggleBg.jsx"
 
 function App() {
   return(
@@ -41,6 +48,16 @@ function App() {
         <Route path='/pincreateEdit' element={<PincreateEdit/>}/>
         <Route path='/pincreateText' element={<PincreateText/>}/>
         <Route path='/pincreateFinal' element={<PincreateFinal/>}/>
+
+        <Route path='/mypinAll' element={<MypinAll/>}/>
+
+        <Route path='/friend' element={<Friend/>}/>
+        <Route path='/group' element={<Group/>}/>
+        <Route path='/AddGroupMembers' element={<AddGroupMembers/>}/>
+        <Route path='/CreateGroup' element={<CreateGroup/>}/>
+        <Route path='/setting' element={<Seeting/>}/>
+
+        <Route path='/pinggleBg' element={<PinggleBg/>}/>
       </Routes>
     </>
   )
