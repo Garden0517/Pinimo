@@ -196,7 +196,7 @@ function MypinAll() {
             </div>
         </div>
 
-        <div className="mypin-allbox">
+        <div className="mypin-allbox" style={{paddingBottom:"120px"}}>
             <div className="mypin-box">
                 <img src={Bg2}/>
                 <div className="mypin-alldate">25.09.02</div>

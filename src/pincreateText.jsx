@@ -9,6 +9,9 @@ import Face from "./img/facebook.png"
 import Thread from './img/thread.png'
 import Twiter from './img/twiter.png'
 
+import Share from "./img/share.png"
+import Position from "./img/position.png"
+
 function PincreateText() {
     const [selectedPlatforms, setSelectedPlatforms] = useState([]); 
 
@@ -118,13 +121,17 @@ function PincreateText() {
         </div>
 
         <div className="createText-box2" >
-            <div className="create-icon"></div>
+            <div className="create-icon">
+                <img src={Share}/>
+            </div>
             <div style={{fontSize:"20px", color:"#fff", marginLeft:"16px"}}>원하는 태그를 추가하세요</div>
             <img src={Arrow} style={{width:"24px", height:"24px", transform: "scaleX(-1)", marginLeft:"97px"}}/>
         </div>
 
         <div className="createText-box2" >
-            <div className="create-icon"></div>
+            <div className="create-icon">
+                <img src={Position}/>
+            </div>
             <div style={{fontSize:"20px", color:"#fff", marginLeft:"16px"}}>위치를 설정하세요</div>
             <img src={Arrow} style={{width:"24px", height:"24px", transform: "scaleX(-1)", marginLeft:"152px"}}/>
         </div>
