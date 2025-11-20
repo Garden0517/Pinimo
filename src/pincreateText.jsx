@@ -12,6 +12,14 @@ import Twiter from './img/twiter.png'
 import Share from "./img/share.png"
 import Position from "./img/position.png"
 
+import Imoge1 from "./img/pincreate/imoge1.png"
+import Imoge2 from "./img/pincreate/imoge2.png"
+import Imoge3 from "./img/pincreate/imoge3.png"
+import Imoge4 from "./img/pincreate/imoge4.png"
+import Imoge5 from "./img/pincreate/imoge5.png"
+import Imoge6 from "./img/pincreate/imoge6.png"
+import Imoge7 from "./img/pincreate/imoge7.png"
+
 function PincreateText() {
     const [selectedPlatforms, setSelectedPlatforms] = useState([]); 
 
@@ -32,6 +40,7 @@ function PincreateText() {
     const [text, setText] = useState('');
     const [text1, setText1] = useState('');
     const [text2, setText2] = useState('');
+    const [texxt3, setText3] = useState('');
 
     return (
         <>
@@ -87,21 +96,48 @@ function PincreateText() {
         <div className="createText-box" style={{height:"94px"}}>
             <div style={{fontSize:"20px", color:"#fff"}}>감정을 입력하세요</div>
             <div style={{display:"flex", flexDirection:"row", justifyContent: "space-between"}}>
-                <div className="textbox-glass" style={{height:"24px", width: "35px"}}></div>
-                <div className="textbox-glass" style={{height:"24px", width: "35px"}}></div>
-                <div className="textbox-glass" style={{height:"24px", width: "35px"}}></div>
-                <div className="textbox-glass" style={{height:"24px", width: "35px"}}></div>
-                <div className="textbox-glass" style={{height:"24px", width: "35px"}}></div>
-                <div className="textbox-glass" style={{height:"24px", width: "35px"}}></div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge1}/>
+                </div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge2}/>
+                </div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge3}/>
+                </div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge4}/>
+                </div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge5}/>
+                </div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge6}/>
+                </div>
+                <div className="textbox-glass" style={{height:"24px", width: "35px", justifyContent:"center"}}>
+                    <img src={Imoge7}/>
+                </div>
             </div>
-            <div className="textbox-glass" style={{height:"24px"}}></div>
+            <textarea
+                value={text2}
+                onChange={(e) => setText2(e.target.value)}
+                placeholder=" 감정를 입력하세요"
+                className="textbox-glass" 
+                style={{
+                    // 내부 텍스트 스타일
+                    fontFamily: 'Inter, pretentard',
+                    lineHeight: '1.5',
+                    height:"38px",
+                    color:"#fff",
+                }}
+            />
         </div>
 
         <div className="createText-box" style={{height:"100px"}}>
             <div style={{fontSize:"20px", color:"#fff"}}>원하는 태그를 추가하세요</div>
             <textarea
-                value={text2}
-                onChange={(e) => setText2(e.target.value)}
+                value={texxt3}
+                onChange={(e) => setText3(e.target.value)}
                 placeholder=" 태그를 입력하세요"
                 className="textbox-glass" 
                 style={{

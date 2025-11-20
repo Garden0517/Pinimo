@@ -2,7 +2,7 @@ import React from 'react'
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import './style.css'
 import Nav from './nav.jsx'
-import Pinmap from './pinmap.jsx';
+import Pinmap from './Pinmap.jsx'
 import Pined from './pined.jsx';
 import Pincreate from './pincreate.jsx';
 import Mypin from './mypin.jsx';
@@ -23,16 +23,20 @@ import AddGroupMembers from './AddGroupMembers.jsx';
 import CreateGroup from "./CreateGroup.jsx"
 import Seeting from "./setting.jsx"
 import PinggleBg from "./pinggleBg.jsx"
+import PinmapOther from './PinmapOther.jsx';
+import PinmapLike from './PinmapLike.jsx';
+import PinmapWrapper from './PinmapWrapper.jsx';
+
 
 function App() {
   return(
     <>
       <Nav/>
       <Routes>
-        <Route index element={<Pinmap />} />      
+        <Route index element={<Pined />} />      
 
         <Route path="/pined/*" element={<Pined />} />
-        <Route path="/pinmap" element={<Pinmap />} />
+        <Route path="/Pinmap" element={<Pinmap />} />
         <Route path="/pincreate" element={<Pincreate />} />
         <Route path="/mypin" element={<Mypin />} />
         <Route path="/pinggle" element={<Pinggle />} />
@@ -58,6 +62,10 @@ function App() {
         <Route path='/setting' element={<Seeting/>}/>
 
         <Route path='/pinggleBg' element={<PinggleBg/>}/>
+
+        <Route path="/PinmapOther" element={<PinmapOther />} />
+        <Route path="/PinmapLike" element={<PinmapLike />} />
+        <Route path="/PinmapWrapper" element={<PinmapWrapper />} />
       </Routes>
     </>
   )

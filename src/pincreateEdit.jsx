@@ -10,6 +10,12 @@ import Img2 from "./img/pincreate/img7.png"
 import Img3 from "./img/pincreate/img8.png"
 import Img4 from "./img/pincreate/img9.png"
 
+import Chacter from "./img/pincreate/chacter.png"
+
+import Face from "./img/pincreate/face.png"
+import Background from "./img/pincreate/background.png"
+import Signboard from "./img/pincreate/signboard.png"
+
 function PincreateEdit () {
         // 1. 스위치 상태 관리 (기본값: 꺼짐/false)
     const [isOn, setIsOn] = useState(false);
@@ -116,6 +122,17 @@ function PincreateEdit () {
                 <div className="under-bar"></div>
                 <div className="under-bar"></div>
             </div>
+            <div 
+                className="chacter"
+                style={{ display: isOn ? 'block' : 'none' }} 
+            >
+                <img src={Chacter}/>
+            </div>
+            <div className="edit">
+                <img src={Face} style={{position:"absolute", zIndex:"991", opacity:"0"}}/>
+                <img src={Background} style={{position:"absolute", zIndex:"993", opacity:"0"}}/>
+                <img src={Signboard} style={{position:"absolute", zIndex:"995", opacity:"0"}}/>
+            </div>
             <div className="imgEdit-box">
                 <div className="img-scroll">
                     <div className="img-edit"><img src={Img4}/></div>
@@ -135,8 +152,11 @@ function PincreateEdit () {
                         className="ai-button"
                         onClick={() => handleTabClick('Ai 편집')}
                         style={activeTab === 'Ai 편집' ? {backgroundColor: '#7FFF6C', color: '#000'} : {}} // 선택된 탭 스타일 추가 (선택 사항)
-                    >
+                    >   
+                    <div style={{color:" #4e4e4eff"}}>
                         Ai 편집
+                    </div>
+                        
                     </div>
                     {/* '얼굴' 버튼 클릭 시 activeTab을 '얼굴'로 설정 */}
                     <div 

@@ -16,6 +16,14 @@ import Img3 from "./img/pincreate/img8.png"
 import Img4 from "./img/pincreate/img9.png"
 
 function PincreateFinal () {
+    // 1. 미리 정의된 텍스트 상태 추가 (Step 1)
+    const [predefinedTexts] = useState({
+        all: '☕️ 오늘의 카페 탐방! 아메리카노 한 잔으로 충전 완료! 햇살 맛집이네요.',
+        friend: '오늘은 남친이랑 성수 인스타 핫플 카페! 너무 분위기 좋고 데이트 하기 좋음! 커피 맛도 최고! 😉',
+        closeFriend: '오늘은 진석이랑 성수동 데이트! 같이 돌아다니다 화나서 싸울뻔 했지만 너무 재밌었음! 다음주는 진석이랑 일본가서 맛집투어 해야징!',
+    });
+
+
         const [texts, setTexts] = useState({
             all: '', // 모든 사람의 텍스트
             friend: '', // 친구의 텍스트
@@ -33,23 +41,102 @@ function PincreateFinal () {
             });
         };
 
-        const [platformTexts, setPlatformTexts] = useState({
-            insta: '',
-            facebook: '',
-            thread: '',
-            twiter: '',
-        });
-
-        // 새로운 상태 추가: 현재 선택된 플랫폼. 기본값은 'insta'로 설정
-        const [currentPlatform, setCurrentPlatform] = useState('insta'); 
+        // 2. 텍스트 변경 버튼 클릭 핸들러 함수 (Step 2 & 3)
+    const handleClickChangeText = () => {
+        // 현재 선택된 범위(currentScope)에 해당하는 미리 정의된 텍스트를 가져와
+        const newText = predefinedTexts[currentScope];
         
-        // 플랫폼 텍스트를 업데이트하는 핸들러 함수
-        const handlePlatformTextChange = (e) => {
-            setPlatformTexts({
-                ...platformTexts, // 기존의 다른 플랫폼 텍스트는 유지
-                [currentPlatform]: e.target.value, // 현재 선택된 플랫폼의 텍스트만 업데이트
-            });
-        };
+        // 현재 'texts' 상태에서 해당 범위의 텍스트를 업데이트합니다.
+        setTexts({
+            ...texts,
+            [currentScope]: newText,
+        });
+        
+        // *참고: 이 함수는 텍스트를 '덮어쓰기' 합니다. 기존 내용 뒤에 '추가'하려면 아래 코드를 사용하세요.
+        /*
+        setTexts(prevTexts => ({
+            ...prevTexts,
+            [currentScope]: prevTexts[currentScope] + '\n\n' + newText,
+        }));
+        */
+    };
+
+    // 1. 플랫폼별로 텍스트 목록(배열) 정의
+const [predefinedPlatformTexts] = useState({
+    insta: [
+        '☕️ 오늘의 카페 탐방 따뜻한 햇살 아래에서 마신 아메리카노 한 잔이 정말 완벽했어요. 사진으로 다 담기지 않을 만큼 분위기 좋은 곳.',
+        '오늘 성수동 데이트! 진석이랑 돌아다니다가 잠깐 티격태격했지만 결국 너무 웃겼음. 다음주는 일본 가서 맛집 투어할 생각에 벌써 설렘 가득 ✨',
+        // 여기에 세 번째 텍스트를 추가할 수도 있습니다.
+    ],
+    facebook: [
+        '오늘은 햇살이 좋아 보여 근처 카페에 들렀습니다. 아메리카노 한 잔 마시며 잠깐 여유를 느끼기 좋더군요. 햇살이 들어오는 자리 덕분에 기분 좋은 휴식 시간이었습니다. ☕️',
+        '오늘은 진석이와 성수동에서 데이트를 했습니다. 여기저기 다니다가 잠깐 분위기가 싸늘해지기도 했지만, 금방 풀리고 결국 즐거운 시간이었어요. 다음 주에는 일본 여행을 가서 맛집을 함께 돌아볼 예정이라 기대가 큽니다. 😊',
+    ],
+    thread: [
+        '오늘 카페 하나 새로 발견했음. 아메리카노로 기분 리셋했고, 햇살 들어오는 자리라 분위기 최고였다. 여기 꽤 괜찮다.',
+        '성수동 데이트 완료. 진석이랑 잠깐 싸울 뻔했지만 재밌었음. 다음주는 일본 맛집 투어 간다.',
+    ],
+    twiter: [
+        '카페 체크 완료. ☕️아메리카노로 에너지 충전. 여긴 진짜 햇살 잘 들어온다.',
+        '오늘 진석이랑 성수동 데이트했는데 돌아다니다가 잠깐 싸울 뻔한 거 실화… 근데 결국 둘 다 웃고 끝남.',
+    ],
+});
+
+// 2. 각 플랫폼별 현재 선택된 텍스트의 인덱스 추적 (새로운 상태)
+const [platformTextIndices, setPlatformTextIndices] = useState({
+    insta: 0,
+    facebook: 0,
+    thread: 0,
+    twiter: 0,
+});
+
+// 3. platformTexts 초기값도 첫 번째 텍스트(인덱스 0)로 설정해야 합니다.
+// 초기값을 계산하는 헬퍼 함수를 사용하여 설정합니다.
+const initialPlatformTexts = Object.keys(predefinedPlatformTexts).reduce((acc, platform) => {
+    acc[platform] = predefinedPlatformTexts[platform][0];
+    return acc;
+}, {});
+
+const [platformTexts, setPlatformTexts] = useState(initialPlatformTexts);
+
+    // 새로운 상태 추가: 현재 선택된 플랫폼. 기본값은 'insta'로 설정
+    const [currentPlatform, setCurrentPlatform] = useState('insta'); 
+    
+    // 플랫폼 텍스트를 업데이트하는 핸들러 함수
+    const handlePlatformTextChange = (e) => {
+        setPlatformTexts({
+            ...platformTexts, 
+            [currentPlatform]: e.target.value, 
+        });
+    };
+
+    // 4. 플랫폼 텍스트 변경 버튼 클릭 핸들러 함수
+    const handleClickChangePlatformText = () => {
+    // 1. 현재 플랫폼의 전체 텍스트 목록과 현재 인덱스를 가져옵니다.
+    const currentList = predefinedPlatformTexts[currentPlatform];
+    const currentIndex = platformTextIndices[currentPlatform];
+    
+    // 2. 다음 인덱스를 계산합니다. (배열의 길이를 초과하면 0으로 순환)
+    const nextIndex = (currentIndex + 1) % currentList.length;
+    
+    // 3. 다음 인덱스에 해당하는 텍스트를 가져옵니다.
+    const newText = currentList[nextIndex];
+
+    // 4. 상태 업데이트: 텍스트 내용과 인덱스 모두 업데이트
+    
+    // 텍스트 내용 업데이트
+    setPlatformTexts(prevTexts => ({
+        ...prevTexts,
+        [currentPlatform]: newText,
+    }));
+    
+    // 인덱스 상태 업데이트
+    setPlatformTextIndices(prevIndices => ({
+        ...prevIndices,
+        [currentPlatform]: nextIndex,
+    }));
+};
+
     return (
         <>
         <div style={{height: "130px", position: "fixed", backgroundColor:"#1F1F1F", zIndex:"2000"}}>
@@ -116,14 +203,21 @@ function PincreateFinal () {
                 className="textbox-glass" 
                 style={{
                     // 내부 텍스트 스타일
-                    fontFamily: 'Inter, pretentard',
+                    fontFamily: 'pretentard',
+                    fontWeight: '300',
                     lineHeight: '1.5',
                     marginTop:"16px",
                     height:"140px",
                     color:"#fff",
                 }}
             />
-            <div className="glass-change" style={{margin:"198px 0 0 329px"}}><img src={ChangeIcon} style={{width:"14px", height:"14px"}}/></div>
+            <div 
+                className="glass-change" 
+                style={{margin:"198px 0 0 329px", cursor: "pointer"}} // 커서 스타일 추가
+                onClick={handleClickChangeText} // ★ 이 부분이 핵심입니다.
+            >
+                <img src={ChangeIcon} style={{width:"14px", height:"14px"}}/>
+            </div>
             <div style={{display:"flex", flexDirection:"row", justifyContent: "space-between", marginTop:"10px"}}>
                 <div className="textbox-glass" style={{height:"24px", width: "auto", padding:"0 10px", fontSize:"12px", color:"white", fontFamily:"300"}}>#인스타맛집</div>
                 <div className="textbox-glass" style={{height:"24px", width: "auto", padding:"0 10px", fontSize:"12px", color:"white", fontFamily:"300"}}>#셀카찍기좋은카페</div>
@@ -188,17 +282,25 @@ function PincreateFinal () {
                     <img src={Twiter} style={{width:"49px", height:"49px"}}/>
                 </div>
             </div>
-            <div className="glass-change" style={{margin:"234px 0 0 329px"}}><img src={ChangeIcon} style={{width:"14px", height:"14px"}}/></div>
+            <div 
+                className="glass-change" 
+                style={{margin:"234px 0 0 329px", cursor: "pointer"}}
+                onClick={handleClickChangePlatformText} // ★ 새로운 핸들러 함수 연결
+            >
+                <img src={ChangeIcon} style={{width:"14px", height:"14px"}}/>
+            </div>
             <textarea
                 // 현재 선택된 플랫폼(currentPlatform)에 해당하는 텍스트를 표시
                 value={platformTexts[currentPlatform]}
                 // 텍스트 변경 시 handlePlatformTextChange 함수 호출
                 onChange={handlePlatformTextChange}
+                // placeholder는 초기값이 보이도록 했으므로 중요하지 않으나 유지
                 placeholder=" 오늘의 카페 탐방 아메리카노 한 잔으로 충전 완료! (플랫폼별 커스텀)"
                 className="textbox-glass" 
                 style={{
                     // 내부 텍스트 스타일
-                    fontFamily: 'Inter, pretentard',
+                    fontFamily: 'pretentard',
+                    fontWeight: '300',
                     lineHeight: '1.5',
                     marginTop:"16px",
                     height:"140px",
