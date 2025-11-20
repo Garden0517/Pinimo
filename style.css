@@ -1,1792 +1,1537 @@
-* {
-    box-sizing: border-box; /* 패딩/보더가 너비/높이에 포함되도록 설정 (레이아웃 계산 용이) */
-    margin: 0;
-    padding: 0;
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #1F1F1F;;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  font-family: Pretendard,  sans-serif;
 }
 
-html {
-    font-size: 62.5%; /* 16px * 0.625 = 10px */
+.container{
+  max-width: 393px;
+  width: 90%;
+  height: 852px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;    /* 가운데 정렬 */
+  position: relative;
 }
 
-/* body는 기본 환경 설정 */
-body {
-    font-family: Pretendard, sans-serif;
-    background-color: #191919;
-    color: #fff;
-    margin: 0; 
-    overflow-x: hidden;
+/* 네비 바 스타일
+----------------------------------------------------------------------------------------------- */
+.glass-screen {
+  position: fixed; 
+  align-self: end;
+  margin-bottom: 35px;
+  width: 360px;
+  height: 50px;
+  border-radius:100px; /* 모서리 둥글게 */
+  z-index: 800;
+  /* 핵심 글래스모피즘 속성 */
+/* 1. 배경 흐림(가장 중요!) */
+  backdrop-filter: blur(16px); /* blur 값을 높여서 더 흐릿한 유리 질감 연출 */
+  -webkit-backdrop-filter: blur(16px); /* 웹킷(Chrome, Safari) 브라우저 지원 */
+
+  /* 2. 반투명 배경 (배경색을 더 투명하게 조정) */
+  background-color: rgba(255, 255, 255, 0.15); /* 불투명도를 0.1에서 0.15로 살짝 높여 시인성 개선 */
+
+  /* 3. 미묘하고 밝은 테두리 */
+  border: 1px solid rgba(255, 255, 255, 1); /* 테두리 불투명도를 높여 유리의 윤곽 강조 */
+  /* border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* (선택 사항) 아래쪽에 미묘한 빛 추가 */
+
+  /* 4. 부드러운 그림자 (요소가 떠 있는 느낌 연출) */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); /* 그림자를 더 부드럽고 넓게 조정하여 입체감 부여 */
+
+
 }
 
-/* 1. 스크롤 바의 너비 정의 */
-body::-webkit-scrollbar, html::-webkit-scrollbar {
-    width: 10px; 
+.glass-card {
+  display: flex;
+  height: 36px;
+  left: 32px;
+  position: absolute;
+  top:7px;
 }
 
-/* 2. 스크롤 바 트랙 (배경) 색상 */
-body::-webkit-scrollbar-track, html::-webkit-scrollbar-track {
-    background: #191919; 
+/*전체 박스 글래스 스타일
+----------------------------------------------------------------------------------------------- */
+.glass {
+  border-radius: 15px;
+  /* 핵심 글래스모피즘 속성 */
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* 3. 스크롤 막대 (thumb) 색상 및 디자인 */
-body::-webkit-scrollbar-thumb, html::-webkit-scrollbar-thumb {
-    background-color: #7FFF6C; 
-    border-radius: 5px;
-    border: 2px solid #191919; /* 트랙 배경색과 동일하게 설정하여 깔끔하게 분리 */
+.no-glass{
+  grid-row: span 2;
+  background-color: transparent; /* 배경색을 투명하게 만듭니다. */
+  backdrop-filter: none; /* 블러(흐림) 효과를 제거합니다. */
+  border: none; /* 테두리를 없앱니다. */
+  box-shadow: none; /* 그림자를 제거합니다. */
 }
 
-/* (선택 사항) 마우스 오버 시 색상 */
-body::-webkit-scrollbar-thumb:hover, html::-webkit-scrollbar-thumb:hover {
-    background-color: #fff;
+/*핀드 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.pinedtop-bg{
+  position: fixed; 
+  width: 100%;
+  height: 188px;
+  background-color: rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 1000;
 }
 
-
-/* 스크롤 영역을 확보하기 위해 섹션 높이를 지정 */
-section {
-    /* height: 100vh; 제거됨 - 내용물에 따라 높이 자동 조절 */
-    width: 100vw;
-    height: auto;
-    padding-top: 5.2vw; /* 섹션 간의 충분한 상단 간격 확보 */
-    box-sizing: border-box;
+.pined-scroll {
+  width: 100%;
+  height: 116px;
+  overflow: auto;
+  scrollbar-width: none;
+  margin-top: 60px;
 }
 
-/* 모든 내용을 감싸는 컨테이너에 레이아웃 설정 */
-.container {
-    display: flex;
-    flex-direction: column; /* 기본적으로 요소들을 세로로 쌓습니다. */
-    /* max-width: 1440px; 최대 너비 설정 */
-    width: 75%;
-    height: auto;
-    margin: 0 auto;    /* 가운데 정렬 */
+.profile-group {
+  display: flex;
+  width: 482px;
+  height: 116px;
+  padding: 0 16px;
+  gap: 28px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  width: 62px;
+  height: 80px;
+  font-size: 10px;
+  color: #cecece;
+  align-items: center;
+  justify-content: center;
+}
+.profile img {
+  width: 62px;
+  height: 62px;
+  margin-bottom: 10px;
+}
+
+.profile.active {
+  font-size: 10px;
+  color: #ffffff;
+}
+
+.profile.active img{
+  width: 80px;
+  height: 80px;
+  border: 5px solid #7FFF6C;
+  border-radius: 100px;
+}
+
+.influencer-bg {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.click-post {
+  display: flex;
+  width: 361px;
+  height: 660px;
+  margin-left: 16px;
+}
+
+.post-bg1{
+  position: absolute;
+  width: 100%;
+  height: 192px;
+  background-image:linear-gradient(to top,
+    rgba(4, 4, 4, 0.48), rgba(19, 19, 19, 0.48), rgba(7, 7, 7, 0.25), rgba(0, 0, 0, 0));
+}
+
+.post-bg{
+  position: absolute;
+  width: 100%;
+  height: 192px;
+  margin-top: 660px;
+  background-image:linear-gradient(to top,
+    rgba(4, 4, 4, 0.48), rgba(19, 19, 19, 0.48), rgba(7, 7, 7, 0.25), rgba(0, 0, 0, 0));
+}
+
+.post-group {
+  display: flex;
+  position: absolute;
+  width: auto;
+  height: 60px;
+  top: 22px;
+  left: 16px
+}
+
+.post img {
+  width: 60px;
+  height: 60px;
+}
+
+.post-font {
+  display: flex;
+  height: 60px;
+  color: #fff;
+  flex-direction: column;
+  margin-left: 12px;
+  font-family: Pretendard;
+  padding: 0;
+}
+.post-title {
+  height: 33px;
+  font-size: 28px;
+  font-weight: 500;
+}
+
+.post-Introduction{
+  height: 18px;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.pinedOther-bg{
+  width: 393px;
+  height: 852px;
+}
+
+.pinedOther-black{
+  width: 393px;
+  height: 784px;
+  padding: 0;
+  background-image:linear-gradient(to bottom,
+    rgba(4, 4, 4, 0.0), rgba(7, 7, 7, 0.34), rgba(19, 19, 19, 0.92));
+}
+.pinedOther-top{
+  display: flex;
+  justify-content: space-between;
+  width: 241.77px;
+  margin-top: 68px;
+  margin-left: 16px;
+}
+
+.pinedOther-text{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #fff;
+}
+
+.pinedOther-rute{
+  display: flex;
+  width: 270px;
+  height: 171px;
+  margin-top: 24px;
+  margin-left: 61.5px;
+}
+
+.pinedOther-group{
+  display: flex;
+  margin-top: 24px;
+  margin-left: 16px;
+}
+
+.pinedOther-box{
+  display: flex;
+  flex-direction: column;
+  width: 335px;
+  height: 306px;
+  margin-top: 5.5px;
+  margin-left: 16px;
+  padding: 12px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinedOther-iconbox{
+  display: flex;
+  align-items: center;
+  width: 208px;
+  height: 24px;
+  margin-top: 10px;
+  color:#fff;
+  font-size: 15px;
+}
+
+.pinedOther-title{
+  display: flex;
+  height: 18px;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 15px;
+}
+/*핀맵 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.full {
+  display: flex;
+  position: relative;
+  z-index: 100;
+  width: 100vw;
+  height: 1000vh;
+}
+
+.pinmap-bg{
+  display: flex;
+  
+  /* 뷰포트 전체를 덮고 위치를 고정 (다른 UI 고정 목적) */
+  position: fixed; 
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  
+  /* 지도 외의 스크롤을 막고, JS로 이동을 제어 */
+  overflow: hidden; 
+  
+  /* 브라우저 기본 터치 동작을 막고 JS가 제어하도록 설정 */
+  touch-action: none;
+}
+
+.pinmap-bg img {
+  width: 1331.25px; 
+  height: 852px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;  /*  이 확실히 적용되게 합니다. */
+  /* 부드러운 애니메이션을 위해 transition 적용 */
+  transition: transform 0.05s linear;
+}
+
+.pinmap-box{
+  display: flex;
+  position: fixed;
+  z-index: 500;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 35px;
+  height: 82px;
+  margin-top: 50px;
+  margin-left: 328px
+}
+
+.pinmap-rute{
+  display: flex;
+  position: absolute;
+  z-index: 100;
+
+}
+
+.rute-button{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 35px;
+  height: 35px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinmap-under{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: auto;
+  padding: 30px 16px 110px 16px;
+  position: absolute;
+  z-index: 500;
+  margin-top: 750px;
+  border-radius: 20px 20px 0px 0px;
+  background-color: rgba(66, 66, 66, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinmap-keyword{
+  display: flex;  
+  align-items: center;
+  width: auto;
+  height: 22px;
+  padding: 0 12px;
+  font-size: 10px;
+  color: #fff;
+  border-radius: 50px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+/*핀제작 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.create-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 393px;
+  height: 100px;
+}
+
+.title-box{
+  display: flex;
+  align-items: center; 
+  width: 361px;
+  height: 27px;
+  margin-top: 51px;
+  margin-left: 16px;
+}
+
+.next-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 27px;
+  font-size: 14px;
+  border-radius: 20px;
+  color: #1F1F1F;
+  background-color: #7FFF6C;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.next-button:visited {
+  color: #1F1F1F;
+}
+
+.x-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 27px;
+  height: 27px;
+  margin-left: 130px;
+  color: #fff;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.under-box{
+  display: flex;
+  justify-content: space-between;
+  width: 393px;
+  margin-bottom: 4px;
+}
+
+.under-bar{
+  display: flex;
+  width: 115px;
+  border-bottom: 1px solid #fff;
+}
+
+.chacter{
+  display: flex;
+  position: absolute;
+  z-index: 900;
+  margin-top: 180px;
+  margin-left: 155px;
+}
+
+.edit{
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 900;
+  margin-top: 42px;
+  margin-left: 16px;
+}
+
+.edit img{
+  width: 298px;
+  height: 360px;
+}
+
+.choice-img {
+  display: flex;
+  width: 326px;
+  height: 394px;
+  margin-top: 10px;
+  margin-left: 33.5px;
+  background-color: #1F1F1F;
+  align-items: center;
+  justify-content: center;
+}
+
+.img-box{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: 497px;
+  padding: 12px 16px;
+  margin-top: 20px;
+  background-color: #1F1F1F;;
+}
+
+.img-text{
+  display: flex;
+  justify-content: space-between;
+  height: 26px;
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 12px;
+}
+
+.img-number{
+  display: flex;
+  width: 26px;
+  height: 26px;
+  border-radius: 16px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-size: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.imgEdit-box{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 360px;
+  margin-top: 42px;
+}
+
+.img-scroll {
+  display: flex;
+  width: 100%;
+  height: 360px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  margin: 0 8px;
+}
+
+.img-edit{
+  flex-shrink: 0;
+  display: flex;
+  width: 298px;
+  height: 360px;
+  margin: 0 8px;
+  background-color: #fff;
+}
+.create-box{
+  display: flex;
+  flex-direction: column;
+  width: 393px;
+  height: auto;
+  margin-top: 574px;
+  background-color: #1F1F1F;
+  z-index: 1000;
+}
+
+.ai-masking{
+  display: flex;
+  flex-direction: column;
+  width: 393px;
+  height: 130px;
+}
+
+.ai-box{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 361px;
+  height: 48px;
+  margin-top: 24px;
+  margin-left: 16px;
+  margin-bottom: 16px;
+}
+
+.ai-button{
+  display: flex;
+  width: 80px;
+  height: 48px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  color: #fff;
+  font-size: 14px;
+  align-items: center;
+  justify-content: center;
+}
+
+.change-box{
+  display: flex;
+  flex-direction: column;
+  width: 393px;
+  padding-bottom: 54px;
+}
+
+.changetext-box{
+  display: flex;
+  width: 349px;
+  height: 74px;
+  margin-top: 24px;
+  margin-left: 16px;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.change-icon{
+  display: flex;
+  width: 17px;
+  height: 17px;
+  margin-top: 55px;
+  margin-left: 330px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 1500;
+}
+
+.face-first{
+  display: flex;
+  width: 115px;
+  height: 20px;
+  margin-top: 12px;
+  margin-left: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.face-second{
+  display: flex;
+  flex-direction: column;  
+  width: 361px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 16px;
+}
+
+.face-third{
+  display: flex;
+  flex-direction: column;  
+  width: 361px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 16px;
+}
+
+/* 컨테이너 */
+.slider-container {
     position: relative;
-    
-    /* background-color: yellow; <- 디버깅을 위해 잠시 남겨두었습니다. 실제 사용 시 제거하세요. */
 }
 
-img, video {
-    width: 100%; /* 이미지가 컨테이너 너비를 넘지 않도록 설정 */
-    height: auto;    /* 이미지 비율을 유지 */
-    display: block;  /* 레이아웃 정렬을 쉽게 하기 위해 블록 요소로 변경 */
+/* 1. 실제 range input 숨기기 및 위치 조정 */
+.custom-range-input {
+    width: 100%;
+    position: absolute;
+    top: 50%; /* 시각적 트랙의 중앙에 위치 */
+    transform: translateY(-50%);
+    opacity: 0; /* 🌟 숨기기! 🌟 */
+    cursor: grab;
+    z-index: 10;
 }
 
-p{
-    font-size: 2rem; /* 20px */
-    line-height: 1.5;
-    font-weight: 300;
-}
-
-h1{
-    font-size: 4.5rem; /* 45px */
-    margin-bottom: 40px;
-    font-weight: 700;
-    line-height: 1.3;
-}
-
-h2{
-    font-size: 2rem; /* 20px */
-    margin-bottom: 20px;
-    font-weight: 500;    
-}
-
-.Topbutton{
-    position: fixed;
+/* 2. 시각적인 트랙을 위한 래퍼 */
+.slider-track-wrapper {
+    position: relative;
+    height: 14px; /* 핸들 크기에 맞춤 */
     display: flex;
-    width: 65px;
-    height: 65px;
-    right: 5vw;
-    bottom: 90px;
-    z-index:800;
-    cursor: pointer;
+    align-items: center;
+}
+
+/* 3. 트랙 (선): 하얀색 2px */
+.slider-track {
+    width: 100%;
+    height: 2px; /* 🌟 2px 선 🌟 */
+    background-color: #fff; /* 🌟 하얀색 🌟 */
+    position: absolute;
+}
+
+/* 4. 핸들 (원형 버튼): #7FFF6C, 14px */
+.slider-handle {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%); /* 정확한 중앙 정렬 */
+    
+    width: 14px; /* 🌟 14px 🌟 */
+    height: 14px; /* 🌟 14px 🌟 */
     border-radius: 50%;
-    background-image: url('./img/topbutton.png'); /* 기본 이미지 경로 */
-    background-size: cover; /* 이미지가 div를 꽉 채우도록 설정 */
-}
-.Topbutton:hover {
-    /* 호버 시 변경될 이미지 설정 */
-    background-image: url('./img/topbutton1.png'); /* 호버 이미지 경로 */
-}
-@media screen and (min-width: 1920px) {
-    body {
-        font-size: 112.5%; 
-    }
-    .Topbutton{
-        right: 160px; /* 1920px에서는 고정 픽셀 위치로 조정 */
-        bottom: 50px;
-    }
-    /* Text1의 left padding을 컨테이너 중앙 기준으로 조정 */
-    .Text1{
-        padding-left: calc(50% - 50px);
-        padding-top: 80px;
-        padding-bottom: 75px;
-    }
-}
-
-/* 2560px 해상도 이상일 때의 스케일링 */
-@media screen and (min-width: 2560px) {
-    /* 폰트 크기 스케일링 */
-    h1 {
-        font-size: 7rem; /* 60px */
-    }
-    h2 {
-        font-size: 3.6rem; /* 25px */
-    }
-    p {
-        font-size: 2.8rem; /* 22px */
-    }
-
-    /* Topbutton: 뷰포트 우측에서 더 멀리 떨어지게 */
-    .Topbutton{
-        right: 10vw; 
-        bottom: 80px;
-        width: 80px;
-        height: 80px;
-    }
+    background-color: #7FFF6C; /* 🌟 요청 색상 🌟 */
     
-    /* 섹션 간격 확장 */
-    section {
-        padding-top: 6vw; 
-        width: 100vw;
-        box-sizing: border-box;
-    }
-
-    /* 컨테이너 최대 너비 제한 및 중앙 정렬 */
-    .container {
-        /* width: 100vw; 콘텐츠가 1920px를 넘지 않도록 제한 */
-        width: 75%; /* 뷰포트 대비 너비 (중앙 마진 확보) */
-        margin: 0 auto;
-        overflow: hidden;
-    }
-
-    /* 첫 번째 섹션 텍스트 위치 조정 (Text1) */
-    .Box1{
-        margin-top: 15vw; /* 전체적으로 상단 여백을 줄임 */
-    }
-    .Text1{
-        padding-top: 150px;
-        padding-bottom: 100px;
-    }
-
-    /* 두 번째 섹션: 바 차트 인덱스 간격 조정 */
-    .Box2 .index {
-        margin-right: 100px; 
-    }
-    .Box2 .table {
-        height: 600px; /* 차트 높이 확장 */
-    }
-    
-    /* 세 번째 섹션: 도넛 차트 크기 및 위치 조정 (vw 기반이었으므로 상대적으로 커짐) */
-    .donut-chart {
-        width: 600px;
-        height: 600px;
-        padding-top: 25%;
-        padding-left: 8%;
-    }
-    .portion-block {
-        clip: rect(0px, 600px, 600px, 300px);
-    }
-    .circle {
-        clip: rect(0px, 300px, 600px, 0px);
-    }
-
-    /* Box10 이미지 크기 조정 */
-    .Box10 img{
-        width: 45%; /* 이미지 크기를 줄여 텍스트와의 공간 확보 */
-    }
-    
-    /* 열여섯번째 섹션 이미지 조정 */
-    .Img16 {
-        margin-top: 4vw; /* 상단 여백 조정 */
-    }
-
-    /* 열일곱번째 섹션 배경 크기 조정 */
-    .Box17{
-        /* background-size가 contain이므로 이미지가 커져서 padding-bottom을 늘려야 함 */
-        padding-bottom: 45vw; /* 720px -> 45vw로 확장 */
-    }
-    
-    /* Box21 (팀원 소개) 간격 조정 */
-    .Box21{
-        height: 60vh; /* 높이 조정 */
-        margin-top: 5vw;
-    }
-
-    /* Box4 (Conclusion) 마진 조정 */
-    .Box4{
-        margin-top: 100vw; /* 이미지 영역 확장으로 인한 마진 조정 (기존 92.7vw) */
-        margin-bottom: 200px;
-    }
+    z-index: 5;
+    pointer-events: none; /* 핸들 위로 마우스 이벤트를 통과시켜 input을 조작할 수 있게 함 */
 }
 
-/* 1. 애니메이션 시작 상태 (화면에서 숨겨진 상태) */
-.animate-item {
-    /* 초기 투명도: 0 (숨김) */
-    opacity: 0; 
-    
-    /* 초기 위치: Y축으로 50px 아래에 위치 */
-    transform: translateY(50px); 
-    
-    /* 애니메이션 전환 효과 정의: 0.8초 동안 부드럽게 움직이도록 설정 */
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out; 
+.bg-button{
+  display: flex;
+  flex-direction: column;  
+  width: 361px;
+  height: 80px;
+  margin-top: 12px;
+  margin-left: 16px;
 }
 
-/* 2. 애니메이션 완료 상태 (JS가 클래스를 추가하면 적용됨) */
-.animate-item.is-visible {
-    /* 최종 투명도: 1 (보이게) */
-    opacity: 1; 
-    
-    /* 최종 위치: 원래 위치 (위로 50px 올라오는 효과) */
-    transform: translateY(0); 
+.brand-box{
+  display: flex;
+  justify-content: space-between;
+  width: 361px;
+  height: 30px;
+  margin-top: 12px;
+  margin-left: 16px;
 }
 
-.animate-item-2 {
-    opacity: 1;
-    /* X축으로 50px 오른쪽으로 이동 */
-    transform: translateX(-470px); 
-    transition: opacity 1s ease-out, transform 1s ease-out;
+.brand-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+  height: 30px;
+  padding: 0 12px;
+  color: #fff;
+  font-size: 14px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* 등장 상태: 제자리로 이동하며 보이게 하기 */
-.animate-item-2.is-visible-2 {
-    opacity: 1;
-    transform: translateX(0); /* 원래 위치로 복귀 */
+.createText-box{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  padding: 17px 0;
+  z-index: 1500;
+  background-color: #1F1F1F;
 }
 
-/*첫 화면*/
-.mainimg{
-    display: flex;
-    flex-direction: column; /* 기본적으로 요소들을 세로로 쌓습니다. */
-    width: 100%;
-    height: auto;
-    margin: 0 auto;    /* 가운데 정렬 */
-    position: relative; 
-    z-index:900;
+.textbox-glass{
+  display: flex;
+  align-items: center;
+  /* width: 361px; */
+  margin-top: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 }
 
-/* 첫번째 섹션 */
-section:nth-child(1) .container {
-    flex-direction: row; /* 내용을 가로로 배치 */
-    flex-wrap: wrap; /* 반응형을 위해 줄바꿈 허용 */
-    justify-content: space-between; /* 요소들을 양 끝으로 분산 */
-    align-items: flex-start; /* 상단 정렬 */
+.createText-box2{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 361px;
+  height: 26px;
+  padding: 17px 0;
+  z-index: 1500;
+  background-color: #1F1F1F;
 }
 
-.Box1{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: auto;
-    margin-top: 17vw;
-    padding-bottom: 150px;
-    justify-content: space-between;
+.create-icon{
+  display: flex;
+  width: 23px;
+  height: 23px;
+  /* border-radius: 20px; */
+  /* background: #D9D9D9; */
 }
 
-.Logo1{
-    z-index: 1000;
+.platfom{
+  display: flex;
+  flex-direction: column;
+  width: 49px;
+  height: 85px;
+}
+
+.glass-change {
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 2000;
+}
+
+.edit-glass{
+  display: flex;
+  align-items: center;
+  width: 337px;
+  margin-top: 8px;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  overflow: hidden;
+  scrollbar-color: rgb(255, 255, 255) rgba(255, 255, 255, 0.2);
+  scrollbar-width: inherit;
+}
+
+.edit-in {
+  overflow-x: auto;
+  display: flex;
+  flex-direction: row;
+  width: 496px;
+  height: 149px;
+  padding-bottom: 8px
+}
+
+.upload-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 361px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #7FFF6C;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+a:visited {
+  color: #000;
+}
+
+/*마이핀 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.mypin-bg{
+  width: 100%;
+  height: 100%;
+}
+
+.mypin-dial {
+  display: flex;
+  position: relative;
+  width: 100%;
+  height:100%;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.mypintop-text{
+  display: flex;
+  align-items: center;
+  font-family: Pretendard;
+  color: #fff;
+  font-weight: 300;
+  width: 361px;
+  font-size: 36px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-top: 104px;
+  height: 36px;
+}
+
+.mypintop-date{
+  display: flex;
+  font-family: Pretendard;
+  color: #ECECEC;
+  font-weight: 300;
+  width: 361px;
+  font-size: 36px;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.dial-box {
+  display: flex;
+  position: absolute;
+  width: 500px; 
+  height: 500px;
+  margin-top: 530px;
+  border-radius: 250px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  align-items: flex-start;
+  justify-content: center;
+
+}
+
+.dial-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.05s ease-out; 
+}
+
+.dial-number:active {
+  cursor: grabbing;
+}
+
+.dial-tick-number {
+    /* 눈금 요소를 dial-number 중앙에 배치하기 위한 설정 */
     position: absolute;
-    display: flex;
-    top: 14vw;
-}
+    top: 50%; /* dial-number의 중앙 수직선 */
+    left: 50%; /* dial-number의 중앙 수평선 */
+    
+    /* 자체 크기 조정 */
+    width: 20px;
+    height: 20px;
+    margin-left: -10px; /* 중앙 정렬을 위해 너비의 절반만큼 이동 */
+    margin-top: -10px; /* 중앙 정렬을 위해 높이의 절반만큼 이동 */
+    
+    transform-origin: 50% 50%; 
 
-.Text1{
-    display: flex;
-    flex-direction: column;
-    padding-left: 0px;
-    padding-top: 130px;
-    padding-bottom: 75px;
-}
-
-.img1{
-    display: flex;
-    width: 53%;
-    height: auto;
-}
-
-.glass1{
-    display: flex;
-    position: absolute;
-    top: 20vw;
-}
-
-.animate-item.delay-1.is-visible {
-    transition-delay: 0.2s;
-}
-
-.animate-item.delay-2.is-visible {
-    transition-delay: 0.4s;
-}
-
-.animate-item.delay-3.is-visible {
-    transition-delay: 0.6s;
-}
-
-.animate-item.delay-4.is-visible {
-    transition-delay: 0.8s;
-}
-
-/* 두번째 섹션 */
-.Text2{
-    display: flex;
-    position: static;
-    flex-direction: column;
-    padding-top: 10.4vw;
-}
-
-.Box2{
-    display: flex;
-    width: 100%;
-    height: auto;
-    margin-top: 80px;
-}
-
-.Box2 .index{
-    display: flex;
-    flex-direction: column;
-    max-width: 104px;
-    margin-right: 8.2vw; /* 119px -> 8.2vw */
-    flex-shrink: 0;
-}
-
-.Box2 .index .text{
-    display: flex;
-    flex-direction: column;
-    height: auto;
-    margin-bottom: 24px;
-}
-
-.Box2 .index .text h1{
-    font-size: 3rem;
-    margin-bottom: 0px;
+    /* 숫자 스타일 */
+    font-family: Pretendard;
+    font-size: 18pt;
     font-weight: 500;
-}
-
-.Box2 .index .text h2{
-    font-size: 2rem;
-    margin-bottom: 0px;
-    font-weight: 300;    
-}
-
-.Box2 .table{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    height: 510px;
-    width: 66.25%;
-}
-
-.animate-item.delay-5.is-visible {
-    transition-delay: 0.5s;
-}
-
-/* ul (차트 전체) 스타일 */
-.bar-chart {
-    list-style: none; /* 기본 리스트 마커 제거 */
-    padding: 0;
-    margin: 0;
-    width: 100%; /* 차트의 최대 너비 설정 */
-}
-
-/* li (개별 막대) 스타일 */
-.bar-item {
-    margin-bottom: 34px;
-    height: 58px; /* 막대 높이 */
-    line-height: 58px;
-    background-color: #7FFF6C; /* 기본 색상 */
-    border-radius: 20px;
-    overflow: hidden;
-
-    /* ✨ 애니메이션 준비: 초기 너비는 0 */
-    width: 0; 
-
-    /* ✨ 애니메이션 설정: 1초 동안 width 변화에 부드러운 효과 적용 */
-    transition: width 1s ease-in-out; 
-}
-
-/* ---------------------------------------------------- */
-/* 데이터 값에 따른 최종 너비 (JavaScript로 active 클래스 부여 시 적용) */
-/* ---------------------------------------------------- */
-
-/* 90% */
-.bar-chart.active .bar-1 { width: 11%; } 
-
-/* 60% */
-.bar-chart.active .bar-2 { width: 27%;} 
-
-/* 75% */
-.bar-chart.active .bar-3 { width: 55%;} 
-
-/* 40% */
-.bar-chart.active .bar-4 { width: 80%;} 
-
-/* 95% */
-.bar-chart.active .bar-5 { width: 100%;}
-
-.Box2 .etc{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 10.4vw; /* 200px -> 10.4vw */
-    padding-left: 20px;
-}
-
-.Box2 .etc p{
-    position: absolute;
-    z-index: 500;
-    font-size: 1.8rem;
-    margin-bottom: 0;
-    font-weight: 500;
-    color: #7FFF6C;
-    padding-left: 12px;
-}
-
-/* 세번째 섹션 */
-.Text3{
-    display: flex;
-    position: static;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 10.4vw;
-}
-
-.Box3{
-    display: flex;
-    position: static;
-    width: 100%;
-    height: auto;
-    flex-direction: column;
-    padding-top: 6.25vw;
-}
-
-.Box3 .first{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    margin-bottom: 30px;
-}
-
-.Box3 .second{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    margin-bottom: 30px;
-}
-
-.second-word3{
-    width: 100%;
-    height: auto;
-    position: absolute;
-    z-index: 500;
-   
-}
-
-.second-word3 img{
-    width: 30%;
-    height: auto;
-     position: absolute;
-    z-index: 100;
-}
-
-.user31{
-    display: flex;
-    margin-top: 12%;
-    left: 20%; /* 450px / 1440px */
-    /* position: absolute;
-    z-index: 100; */
-}
-
-.user32{
-    display: flex;
-    margin-top: 12%;
-    left: 48%; /* 979px / 1440px */
-    /* position: absolute;
-    z-index: 100; */
-}
-
-.user33{
-    display: flex;
-    margin-top: 12%;
-    left: 69%; /* 1309px / 1440px */
-    /* position: absolute;
-    z-index: 100; */
-}
-
-.user34{
-    display: flex;
-    margin-top: 25%; /* 358px / 1440px */
-    left: 0%; /* 79px / 1440px */
-    /* position: absolute;
-    z-index: 100; */
-}
-
-.user35{
-    display: flex;
-    margin-top: 25%;
-    left: 40%; /* 856px / 1440px */
-    /* position: absolute;
-    z-index: 100; */
-}
-
-.user36{
-    display: flex;
-    margin-top: 25%;
-    left: 69%; /* 1143px / 1440px */
-    /* position: absolute;
-    z-index: 100; */
-}
-
-
-.animate-item.delay1.is-visible {
-    transition-delay: 0.2s;
-}
-
-.animate-item.delay2.is-visible {
-    transition-delay: 0.4s;
-}
-
-.animate-item.delay3.is-visible {
-    transition-delay: 0.6s;
-}
-
-.animate-item.delay4.is-visible {
-    transition-delay: 0.8s;
-}
-.animate-item.delay5.is-visible {
-    transition-delay: 1.0s;
-}
-
-.animate-item.delay6.is-visible {
-    transition-delay: 1.2s;
-}
-
-.chart{
-    position: absolute;
-    z-index: 200;
-    margin-top: 30%;
-    margin-left: 12%;
-}
-
-.chart p{
-    font-size: 4rem;
-    font-weight: 500;
-    color: black;   
-}
-
-.donut3{
-    display: flex;
-    position: relative;
-    width: 50%;
-    height: auto;
-    /* background-image: url('/img/userresearch/box1.png'); */
-
-    margin-right: 20px;
-}
-
-.dount31{
-    margin-top: 24%;
-    margin-left: 8%;
-    width: 51%;
-    display: flex;
-    position: absolute;
-}
-
-.Bar3{
-    display: flex;
-    width: 50%;
-    height: auto;
-}
-
-.index3{
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    height: auto;
-    width: 50%;
-    z-index: 1000;
-    padding-top: 12%; /* 187px / 1440px = 13% */
-    padding-left: 3.5%; /* 50px / 1440px = 3.5% */
-     padding-right: 3.5%; /* 50px / 1440px = 3.5% */
-}
-
-.bar-chart3 {
-    list-style: none; /* 기본 리스트 마커 제거 */
-    padding: 0;
-    margin: 0;
-    width: 100%; /* 차트의 최대 너비 설정 */
-}
-
-/* li (개별 막대) 스타일 */
-.bar-item3 {
-    position: absolute;
-    height: 20%; /* 막대 높이 */
-    line-height: 10%;
-    background-color: #7FFF6C; /* 기본 색상 */
-    border-radius: 20rem;
-    overflow: hidden;
-
-    /* ✨ 애니메이션 준비: 초기 너비는 0 */
-    width: 0px; 
-
-    /* ✨ 애니메이션 설정: 1초 동안 width 변화에 부드러운 효과 적용 */
-    transition: width 1s ease-in-out; 
-}
-
-.bar-31{
-    margin-top: 0;
-}
-.bar-32{
-    margin-top: 16%;
-}
-.bar-33{
-    margin-top: 32%;
-}
-.bar-34{
-    margin-top: 48%;
-}
-.bar-35{
-    margin-top: 64%;
-}
-.bar-36{
-    margin-top: 80%;
-}
-
-/* ---------------------------------------------------- */
-/* 데이터 값에 따른 최종 너비 (JavaScript로 active 클래스 부여 시 적용) */
-/* ---------------------------------------------------- */
-.bar-chart3.active .bar-31 { width: 71%; } 
-.bar-chart3.active .bar-32 { width: 64%;} 
-.bar-chart3.active .bar-33 { width: 60%;} 
-.bar-chart3.active .bar-34 { width: 32%;} 
-.bar-chart3.active .bar-35 { width: 18%;}
-.bar-chart3.active .bar-36 { width: 11%;}
-
-
-
-/* 네번쨰 섹션 */
-.Img4{
-    display: flex;
-    flex-direction: column; /* 기본적으로 요소들을 세로로 쌓습니다. */
-    width: 100%;
-    height: auto;
-    margin: 0 auto;
-    position: absolute;  
-    padding-top: 10.4vw;
-}
-
-.problems1{
-    display: flex;
-    position: absolute;
-    width: 49%;
-    left: 51%;
-    top:90%;
-    z-index: 100;
-}
-.problems2{
-    display: flex;
-    position: absolute;
-    width: 49%;
-    left: 0;
-    top: 350%; /* 514px / 1920px */
-    z-index: 200;
-}
-
-.problems3{
-    display: flex;
-    position: absolute;
-    width: 49%;
-    left: 51%;
-    top: 470%; /* 794px / 1920px */
-    z-index: 300;
-}
-.problems4{
-    display: flex;
-    position: absolute;
-    width: 49%;
-    left: 0;
-    top: 640%; /* 1091px / 1920px */
-    z-index: 400;
-}
-
-.problems5{
-    display: flex;
-    position: absolute;
-    width: 49%;
-    left: 51%;
-    top: 810%; /* 1440px / 1920px */
-    z-index: 500;
-}
-.problems6{
-    display: flex;
-    position: absolute;
-    width: 49%;
-    left: 0;
-    top: 850%; /* 1500px / 1920px */
-    z-index: 600;
-}
-
-.Text4{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    z-index: 500;
-    padding-top: 10.4vw; /* 200px -> 10.4vw */
-}
-
-.Box4{
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    z-index: 900;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    margin-top: 92.7vw; /* 1780px -> 92.7vw */
-    margin-bottom: 150px;
-}
-
-/* .Box4 h1{
-    font-size: 2.8rem;
-    font-weight: 600;
-    color: #7FFF6C;
-} */
-
-.Box4 p{
-    display: flex;
-    text-align: center;
-}
-
-.word4{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-}
-
-
-/* 다섯번쨰 섹션 */
-.Text5{
-    display: flex;
-    flex-direction: column;
-    padding-top: 10.4vw;
-}
-
-.Text5 .textbox {
-     display: flex;
-     flex-direction: column;   
-     width: 100%;
-}
-
-.word5{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-bottom: 300px;
-}
-
-/* 여섯번쨰 섹션 */
-.Text6{
-    display: flex;
-    flex-direction: column;
-    padding-bottom: 10.4vw;
-}
-
-.word6 {
-    display: flex;
-    flex-direction: column;
-}
-.word6_1, .word6_2, .word6_3 {
-    display: flex;
-    transition: margin-bottom 0.4s ease-in-out;
-}
-
-.margin-group-1 {
-    margin-bottom: 20px; /* .word6_1의 기본 margin-bottom */
-}
-
-#section-solution {
-    /* 기존 padding-top 값 유지 */
-    padding-top: 2.6vw;
-}
-
-#solution-sticky-wrapper {
-    /* 스크롤 가능한 공간을 충분히 확보 (예: 400vh) */
-    /* 이 값이 인터랙션이 지속될 스크롤 길이입니다. 이미지 그룹 수(3개) * 화면 높이(100vh)를 고려하여 설정합니다. */
-    min-height: 350vh; 
-    position: relative;
-    /* max-width, width, margin: 0 auto 등 기존 .container 스타일은 이미 적용되어 있습니다. */
-}
-
-.solution-content-wrapper {
-    /* 고정할 내용을 화면 상단에 고정합니다. */
-    position: sticky;
-    top: 0; 
-    
-    /* 뷰포트 높이만큼만 보이도록 합니다. */
-    height: 100vh;
-    width: 100%;
-    
-    /* 내용을 수직 정렬하고 가운데 배치할 수 있도록 flex 사용 (필요에 따라 조정) */
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */ 
-    
-    /* 컨테이너의 원래 padding-top을 유지 (Text6이 너무 위에 붙지 않도록) */
-    padding-top: 50px; 
-}
-
-.margin-group-1 {
-    margin-bottom: 30px; /* (예시) 30px로 변경하여 1단계에서 가장 넓은 마진 확보 */
-}
-
-/* 두 번째 그룹 마진 */
-.margin-group-2 {
-    margin-bottom: 15px; /* (예시) 15px로 변경하여 1단계와 3단계 사이의 값으로 설정 */
-}
-
-/* 세 번째 그룹 마진 */
-.margin-group-3 {
-    margin-bottom: 0px; /* (예시) 0px로 유지하여 최종적으로 가장 좁은 마진으로 전환 */
-}
-
-
-/* 일곱번째 섹션*/
-.Text7{
-    display: flex;
-    flex-direction: column;
-
-}
-
-.imgAll{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    z-index: 50;
-}
-
-.imgbox7{
-    width: 100%;
-    height: auto;
-    position: relative;
-    /* background-image: url("img/service/img.png");
-    background-repeat: no-repeat;
-    margin-top: 8.5vw;
-    background-size: cover;
-   background-position-x: left;
-   background-position-y: center; */
-}
-
-.img71{
-    width: 90%;
-    margin-top: 2%;
-}
-
-.img72{
-    width: 90%;
-    margin-top: 8%;
-}
-
-.img73{
-    width: 90%;
-    margin-top: 1%;
-}
-
-/* 여덟번째 섹션*/
-.Box8 {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 10.4vw;
-}
-
-video {
-    pointer-events: none;
-}
-
-/* 아홉번째 섹션*/
-.Text9{
-    display: flex;
-    flex-direction: column;
-    padding-top: 10.4vw;
-}
-
-.Text9 .textbox {
-     display: flex;
-     flex-direction: column;   
-     width: 100%;
-}
-
-.Img9{
-    padding-top: 9.8vw;
-    display: flex;
-    flex-direction: column; /* 기본적으로 요소들을 세로로 쌓습니다. */
-    width: 100%;
-    height: auto;
-    margin: 0 auto;    /* 가운데 정렬 */
-    position: relative;  
-}
-
-.color-block {
-    /* 초기 상태: 첫 번째 블록 제외하고 숨김 */
-    opacity: 0;
-    transform: translateY(-150px); /* 위로 50px 이동된 상태에서 시작 */
-    transition: opacity 0.2s ease-out, transform 0.8s ease-out; /* 부드러운 전환 효과 */
-    position: relative;
-}
-
-/* 첫 번째 Pinimo Green 블록은 처음에 보여야 함 */
-.color-block.block-1 {
-    opacity: 1;
-    transform: translateY(0);
-    position: relative; /* Z-index를 위해 다시 추가 */
-    z-index: 10; /* 검은색(z-index: 1)보다 낮게 설정 */
-}
-
-/* 애니메이션 트리거 시 적용할 최종 상태 */
-.color-block.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.Box9{
-    display: flex;
-    height: auto;
-    position: relative;
-}
-
-.min91{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 100;
-    top: 2vw; /* 40px -> 2vw */
-    left: 22.45%; /* 431px / 1920px */
-}
-
-.min92{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 100;
-    top: 2vw;
-    left: 79.16%; /* 1520px / 1920px */
-}
-
-
-.min93{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 500;
-    top: 11.6vw;
-    left: 50.5%;
-}
-
-.min94{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 100;
-    top: 22.4vw; /* 430px -> 22.4vw */
-    left: 8.9%;
-}
-
-.min95{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 100;
-    top: 32.4vw; /* 622px -> 32.4vw */
-    left: 36.77%;
-}
-.min96{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 100;
-    top: 42.2vw; /* 811px -> 42.2vw */
-    left: 22.45%;
-}
-.min97{
-    display: flex;
-    position: absolute;
-    width: 10%;
-    height: auto;
-    z-index: 100;
-    top: 42.2vw;
-    left: 65.41%;
-}
-
-.icon-carousel-container {
-    display: flex;
-    position: relative;
-    z-index: 100;
-    top: 11.8vw; /* 227px -> 11.8vw */
-    left: 12.5vw; /* 240px -> 12.5vw */
-    width: 24.6%; /* 472px -> 24.6% */
-    height: auto;
-}
-
-.icon-item {
-    /* 모든 아이콘을 겹치게 설정 */
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    opacity: 0; /* 기본적으로 모든 아이콘을 숨김 */
-    transition: opacity 0s ease-in-out; /* 부드러운 전환 효과를 위해 추가 */
-}
-
-.icon-item img {
-    width: 100%;
-    height: 100%;
-    display: block;
-}
-
-.icon-item.active {
-    /* 현재 활성화된 아이콘만 보이게 설정 */
-    opacity: 1;
-}
-
-/* 1. 이미지 스택 컨테이너 설정 */
-#logo-image-stack {
-    /* 겹치는 요소의 absolute 기준점 */
-    position: relative; 
-    
-    /* 너비는 부모 요소(.Img9)를 따르고 높이는 내부 콘텐츠(logo-image)에 맞춰집니다. */
-    width: 100%;
-    height: auto; 
-}
-
-/* 2. 기존 이미지 (#logo-image)를 기준으로 삼습니다. */
-#logo-image-stack img {
-    /* 이미지가 한 줄에 하나씩 배치되도록 설정 */
-    display: block; 
-    
-    /* 너비를 100%로 설정하여 부모(#logo-image-stack) 너비를 따르게 함 */
-    width: 100%;
-    height: auto; 
-}
-
-/* 기존 이미지 (#logo-image)만 relative로 설정하여 컨테이너 높이를 유지 */
-#logo-image-stack #logo-image {
-    position: relative;
-}
-
-.fade-in-item {
-    /* 배치: 부모(#logo-image-stack)의 top/left를 기준으로 겹치게 설정 */
-    position: absolute;
-    top: 0;
-    left: 0;
-    
-    /* 크기: 기존 이미지와 동일한 크기로 완벽하게 겹치도록 설정 */
-    width: 100%; 
-    height: 100%; 
-    
-    /* 초기 상태: 투명하게 숨김 */
-    opacity: 0; 
-    
-    /* 애니메이션 설정: 1.5초 동안 투명도 변화를 부드럽게 전환 */
-    transition: opacity 1.5s ease-out; 
-    
-    /* z-index: 기존 이미지 위에 확실히 보이도록 설정 */
-    z-index: 10; 
-}
-
-/* 애니메이션 완료 상태 (JavaScript가 .is-faded-in 클래스를 추가하면 적용됨) */
-.fade-in-item.is-faded-in {
-    /* 최종 상태: 보이게 설정 */
-    opacity: 1; 
-}
-
-/* 열번째 섹션*/
-.Text10{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-}
-
-.Box10 img{
-    width: 52%;
-    height: auto;
-}
-
-.Box10{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    margin-top: 10.4vw;
-    margin-bottom: 15.6vw;
-    justify-content: space-between;
-}
-
-/* 열한번째 섹션*/
-.Bg11{
-    background-image: url("img/mapbases/map11.png");
-    background-repeat: no-repeat;
-    width: 100vw;
-    height: auto;
-    background-size: cover;
-  background-position: center;
-}
-
-.Box11_1{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-top: 2.7vw; /* 53px -> 2.7vw */
-    padding-bottom: 19.7vw; /* 379px -> 19.7vw */
-}
-
-.Text11{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 50%;
-    margin-top: 2.6vw;
-
-}
-
-.Key11{
-    display: flex;
-    width: 100%;
-    height: auto;
-    margin-top: 8.7vw; /* 167px -> 8.7vw */
-    padding-left: 6.35vw; /* 122px -> 6.35vw */
-}
-
-.Box11_2{
-    display: flex;
-    width: 50%;
-    margin-left: auto;
-    flex-direction: row-reverse;
-    padding-bottom: 8.9vw; /* 171px -> 8.9vw */
-}
-
-.Box11_3{
-    display: flex;
-    flex-direction: column;
-}
-
-.mapkey{
-    position: relative;
-    z-index: 500;
-}
-
-.maprute{
-    background-image: url("img/mapbases/rute.png");
-    background-repeat: no-repeat;
-    /* background-size: cover; */
-  background-position: center;
-
-    /* 초기 상태: 투명하게 숨김 */
-    opacity: 0;
-    
-    /* 전환 효과: 0.5초 동안 부드럽게 투명도를 변경 */
-    transition: opacity 0.5s ease-in-out;
-}
-
-.maprute.is-rute-visible {
-    opacity: 1; /* 보이게 설정 */
-}
-
-.Box11_4{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: absolute;
-    z-index: 1000;
-    margin: 0 auto;
-    width: 100vw;
-    padding-top: 31.6vw; /* 607px -> 31.6vw */
-}
-
-.button11{
-    background-image: url("img/mapbases/button11.png");
-    background-size: cover;
-    background-repeat: no-repeat;
-    display: flex;
-    width: 9vw; /* 172px -> 9vw */
-    height: 9vw;
-    /* max-width: 172px;
-    max-height: 172px; */
-    justify-content: space-around;
-    align-items: center;
-    margin-bottom: 24px;
-    box-sizing: border-box;
-}
-
-.button11 p{
-    font-size: 4rem;
-    line-height: 1.5;
-    font-weight: 700;
-}
-
-@keyframes pulse-border {
-    0% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); /* 초기 (테두리 없음) */
-        border: 1px solid rgba(255, 255, 255, 0.4);
-    }
-    50% {
-        box-shadow: 0 0 0 4px rgba(127, 255, 127, 1); /* 확장 및 투명도 0 */
-        border: 1px solid rgba(127, 255, 127, 1); /* 테두리가 진해짐 */
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.4); /* 종료 (다시 축소) */
-        border: 1px solid rgba(255, 255, 255, 0.4);
-    }
-}
-
-/* 2. OFF 상태일 때 적용될 클래스 */
-.button11.is-pulsing {
-    /* border 자체는 animation 내에서 제어 */
-    /* 애니메이션 적용: pulse-border를 1.5초 간격으로 무한 반복 */
-    animation: pulse-border 1.5s infinite;
-    border-radius: 50%; /* 버튼이 원형이라고 가정하고 테두리도 원형으로 */
-}
-
-.box11{
-    background-image: url("img/mapbases/box11.png");
-    background-size: cover;
-  background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    flex-direction: column;
-    width: 41.6%; /* 800px -> 41.6% */
-    height: 14vw; /* 270px -> 14vw (높이도 비례하여 확장) */
-    /* max-height: 270px;
-    max-width: 800px; */
-    justify-content: center;
-    align-items: center;
-}
-
-.h11{
-    display: flex;
-    flex-direction: row;
-}
-
-.h11 h1{
-    font-size: 7rem;
-    line-height: 1.5;
-    font-weight: 700;
-    margin-bottom: 0;
-}
-
-.text-active-color {
-    color: #7FFF6C !important; /* 중요한 색상이므로 !important를 사용하거나, 더 높은 선택자 사용 */
-}
-
-/* 2. Box11 내부 h1 기본 색상 설정 (흰색이 기본이지만 명시적으로 설정) */
-.box11 h1 {
-    color: #fff; /* 기본 텍스트 색상 */
-    transition: color 0.3s ease; /* 색상 변경 시 부드러운 전환 효과 추가 */
-}
-
-.box11 h2{
-    font-size: 2rem;
-    line-height: 1.5;
-    font-weight: 300;
-    text-align: center;
-    margin-bottom: 0;
-}
-
-
-/* 열두번째 섹션*/
-.rock12{
-    padding-top: 10.4vw;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.rockImg12{
-    display: flex;
-}
-
-.rock12 h1{
-    font-size: 5rem;
-    line-height: 1.3;
-    font-weight: 600;
-    margin-bottom: 0;
-    text-align: center;
-    margin-top: 28px;
-}
-
-.rock12 p{
-    font-size: 2rem;
-    line-height: 1.5;
-    font-weight: 300;
-    margin-bottom: 16.1vw; /* 310px -> 16.1vw */
-    text-align: center;
-    margin-top: 36px;
-}
-
-        /* 1. 스크롤을 잡아둘 섹션 */
-        .scroll-interaction-section {
-            /* 텍스트 박스 4개 * 100vh + 시작/종료 여유 공간 */
-            height: calc(100vh * 6 + 1px); /* 4개의 텍스트를 한 화면씩 보여줄 높이 확보 */
-            position: relative;
-        }
-
-        /* 2. 화면에 고정될 컨테이너 (스크롤 고정의 핵심) */
-        .fixed-container {
-            position: sticky; /* 섹션 내에서 스크롤될 때까지 고정 */
-            top: 0;           /* 화면 상단에 닿았을 때 고정 시작 */
-            width: 100%;
-            height: 100vh;    /* 뷰포트 높이로 고정 */
-            overflow: hidden; /* 내부 요소의 이동으로 인한 스크롤바 방지 */
-            /* Flexbox로 중앙 정렬을 위한 설정 (선택 사항) */
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* 3. 텍스트 박스 컨테이너 */
-        .all12 {
-            display: flex;
-            flex-direction: row;
-            width: 100%;
-            height: 100vh; /* fixed-container의 높이를 상속 */
-        }
-
-        /* 4. 텍스트 그룹 (스크롤로 인해 위로 움직일 대상) */
-        .all-box12 {
-            width: 50%;
-            height: 100%; /* 고정된 높이를 유지 */
-            display: flex;
-            flex-direction: column;
-            /* JS로 translateY가 적용되어 위로 이동합니다. */
-            transition: transform 0.1s linear; /* 부드러운 스크롤 효과 (선택 사항) */
-        }
-
-        /* 5. 개별 텍스트 박스 (각각 뷰포트 높이) */
-        .box12 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center; 
-            width: 100%;
-            height: 100vh; /* 각 텍스트가 화면 전체 높이를 차지 */
-            padding: 0 0;
-            flex-shrink: 0; /* 크기가 줄어들지 않도록 방지 */
-        }
-        
-        /* 6. 텍스트 내용 */
-        .textbox12 {
-            /* 텍스트 위치만 남기기 위해 높이 제거 */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-top: 50px; /* 상단 여유 공간 추가 */
-            padding-bottom: 50px; /* 하단 여유 공간 추가 */
-        }
-
-        /* 7. 이미지 섹션 (고정된 이미지) */
-        .img12 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            width: 50%;
-            height: 100vh; /* 화면 높이에 맞추기 */
-            overflow: hidden;
-        }
-
-         .img12 img {
-            max-height: 100%; /* 이미지 크기 조정 */
-            width: auto;
-            object-fit: contain;
-            /* 💡 수정된 부분: 이미지 전환 시 부드러운 opacity 효과 추가 */
-            transition: opacity 0.5s ease-in-out; 
-            opacity: 1; /* 기본적으로 보이도록 설정 */
-        }
-
-        .black12{
-            width: 50%;
-            height: 280px;
-            position: absolute;
-            z-index: 500;
-            background-image: linear-gradient(rgba(25, 25, 25, 1), rgba(25, 25, 25, 0));
-        }
-
-
-/* 열세번째 섹션*/
-.Text13{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 50%;
-    margin-top: 58px;   
-}
-
-.Box13{
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 7.8vw; /* 150px -> 7.8vw */
-    padding-top: 10.4vw;
-}
-
-/* 열네번째 섹션 */
-.Text14{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 50%;
-    margin-top: 58px;
-    align-items: flex-end;   
-    transition: opacity 0.4s ease-in-out; /* 부드러운 전환 효과를 위해 추가 */
-}
-
-/* 페이드 아웃 시 투명도를 0으로 만듦 */
-.Text14.fade-out {
-    opacity: 0;
-}
-
-.Box14{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-top: 2.1vw; /* 41px -> 2.1vw */
-    padding-bottom: 8.3vw; /* 159px -> 8.3vw */
-}
-
-.Img14{
-    display: flex;
-    width: 57.7%; /* 832px -> 57.7% */
-}
-
-/* 1. 스크롤 공간 확보 */
-#connection-sticky-wrapper {
-    /* 3단계 인터랙션이 진행될 충분한 스크롤 공간 확보 (3단계 * 100vh = 300vh) */
-    min-height: 300vh; 
-    position: relative;
-    /* 기존 .container 스타일 유지 */
-}
-
-/* 2. 고정될 콘텐츠 (이미지와 텍스트) */
-.connection-content-wrapper {
-    position: sticky;
-    top: 0; 
-    height: 100vh; /* 뷰포트 높이에 고정 */
-    width: 100%;
-    /* 내부 콘텐츠 정렬을 위해 flex 속성 추가 (필요 시) */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-}
-
-/* 3. Box14 내부의 기존 레이아웃을 sticky wrapper에 맞게 조정 */
-.connection-content-wrapper .Box14 {
-    /* Box14는 기존의 가로 정렬 레이아웃을 유지 */
-    width: 100%; 
-    display: flex;
-    flex-direction: row; 
-    align-items: center;
-    justify-content: space-between;
-}
-
-/* 열다섯번째 섹션 */
-.Box15{
-    display: flex;
-    flex-direction: row;
-    margin-top: 41px;
-    padding-bottom: 6.5vw;
-    justify-content: space-between;
-}
-
-.Box15 img{
-    width: 50%;
-    height: auto;
-}
-
-.Text15{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 50%;
-    margin-top: 322px;
-}
-
-/* 열여섯번째 섹션 */
-.Box16{
-    /* background-image: url("img/authenticity.png");
-    background-repeat: no-repeat; */
-    display: flex;
-    height: auto;
-    margin-top: 7.8vw; /* 150px -> 7.8vw */
-}
-
-.Text16{
-    display: flex;
-    /* position: absolute; */
-    flex-direction: column;
-    width: 50%;
-    /* margin-left: 913px; */
-    /* padding-top: 200px; */
-    padding-bottom: 45.3vw; /* 870px -> 45.3vw */
-}
-
-.Img16{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width: 50%; /* 835px -> 58% */
-    margin-top: 6.25vw; /* 120px -> 6.25vw */
-    height: auto;
-}
-
-.img16{
-    width: auto;
-    height: auto;
-}
-
-.container16{
-    display: flex;
-    position: relative;
-    width: 100%;
-    height: auto;
-    margin-top: 20.8vw; /* 400px -> 20.8vw */
-}
-
-.box16{
-    display: flex;
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    z-index: 500;
-    justify-content: center; /* 가운데 정렬 */
-}
-
-.outline16{
-    display: flex;
-    position: absolute;
-    z-index: 100;
-    width: 100%;
-    height: 100%;
-    background-image: linear-gradient(to right,
-    rgba(25, 25, 25, 1) 5%, /* 100을 1.0 또는 1로 수정 */
-    rgba(25, 25, 25, 0) 20%,
-    rgba(25, 25, 25, 0) 80%,
-    rgba(25, 25, 25, 1) 95%  /* 100을 1.0 또는 1로 수정, 마지막 쉼표 제거 */
-);
-}
-
-.scroll16{
-    justify-content: center; /* 가운데 정렬 */
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: auto;
-    flex-wrap: nowrap;
-    gap: 90px; /* 이미지 간격 (기존 margin 값 활용) */
-}
-
-.scrollbox{
-    display: flex;
-    width: auto;
-    height: 75%;
-    margin-top: 9.4vw; /* 180px -> 9.4vw */
-}
-
-.scrollbox-1{
-    display: flex;
-    width: auto;
-    height: 100%;
-    margin-top: 6.3vw; /* 90px -> 4.7vw */
-}
-
-.scrollbox-1 img{
-    width: auto;
-    height: 100vh;
-}
-
-.scroll1box img {
-    height: 80vh;
-    width: auto; /* 높이를 기준으로 너비 자동 조정 */
-    transition: transform 0.4s ease-in-out; /* 움직임 효과 */
-}
-
-.phone16{
-    display: flex;
-    width: 22vw;
-    margin: 0 auto;
-    justify-content: center;
-}
-
-.animate-item-3 {
-    opacity: 0;
-    transform: translateY(200px); 
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-/* 등장 상태: 제자리로 이동하며 보이게 하기 */
-.animate-item-3.is-visible-3 {
-    opacity: 1;
-    transform: translateY(0); /* 원래 위치로 복귀 */
-}
-
-.animate-item-3.delay16-1.is-visible-3 {
-    transition-delay: 0s;
-}
-
-.animate-item-3.delay16-2.is-visible-3 {
-    transition-delay: 0.4s;
-}
-
-/*열일곱번째*/
-.Box17{
-    background-image: url("img/authenticity2.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-top: 15.6vw; /* 300px -> 15.6vw */
-}
-
-.Text17{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    margin-top: 17px;
-    padding-bottom: 37.5vw; /* 720px -> 37.5vw */
-}
-
-/* 열여덟번째 섹션 */
-.Box18{
-    display: flex;
-    flex-direction: row;
-    margin-top: 10.4vw;
-    padding-bottom: 7vw;
-    justify-content: space-between;
-}
-
-.Box18 img{
-    display: flex;
-    width: 50%;
-    height: auto;
-}
-
-.Text18{
-    display: flex;
-    position: relative;
-    flex-direction: column;
-    width: 50%;
-}
-
-
-/* 열아홉번째 섹션 */
-.Img19{
-    display: flex;
-    position: relative;
-    margin: 0 auto;
-    width: 100%;
-    z-index: 900;
-}
-.Text19{
-    display: flex;
-    position: absolute;
-    flex-direction: column;
-    text-align: center;
-    z-index: 1000;
-    margin: 0 auto;
-    width: 100%;
-    padding-top: 22.4vw;
-}
-
-/* 스물번째 섹션 */
-.Box20{
-    padding-bottom: 27px;
-}
-
-#video-container {
-    position: relative; /* 자식 요소인 버튼을 영상 위에 띄우기 위함 */
-    width: 100%; /* 원하는 너비 설정 */
-    height: auto; /* 원하는 높이 설정 */
-    background-color: #191919;
-
-}
-
-#user-video {
-    width: 100%;
-    height: 100%;
-    /* 사용자의 조작을 막기 위해 마우스 이벤트를 비활성화할 수 있습니다. */
-    /* pointer-events: none; */ 
-    border-radius: 30px;
-}
-
-#play-button-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 30px;
-    background: rgba(0, 0, 0, 0.5); /* 어두운 오버레이 (선택 사항) */
-    color: #7FFF6C;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 36px;    
-    font-weight: 600;
-    cursor: pointer; /* 클릭 가능하다는 표시 */
-    z-index: 10; /* 영상 위에 위치하도록 설정 */
-}
-
-#play-button-overlay.is-playing {
-    opacity: 0;
-}
-
-/* 스물한번째 섹션 */
-.Box21{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 80vh;
-    justify-content: space-between;
-}
-
-.Text21{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    height: auto;
-}
-
-.Text21 img{
-    display: flex;
-    width: 70%;
-    height: auto;
-}
-
-.Text21 h1{
-    font-size: 24px;
-    font-weight: 400;
     color: #fff;
-    margin-top: 40px;
-    margin-bottom: 0;
     text-align: center;
+    line-height: 90px; /* 수직 중앙 정렬 */
 }
 
-.Text21 p{
-    font-size: 24px;
-    font-weight: 400;
-    color: #fff;
-    margin-top: 0px;
-    text-align: center;
+.dial-tick-line {
+    position: absolute;
+    top: 50%; /* 중앙 배치 시작 */
+    left: 50%;
+    
+    /* 눈금 막대의 크기 */
+    width: 2px; /* 얇은 막대 */
+    height: 12px; /* 길이 */
+    border-radius: 50%;
+    
+    /* 막대의 색상 및 정렬 */
+    background-color: #fff; /* 흰색으로 설정 */
+    
+    /* 중앙 정렬: 너비/높이의 절반만큼 이동 */
+    margin-left: -1px; /* width 2px의 절반 */
+    margin-top: -10px; /* height 10px만큼 위로 이동하여 눈금처럼 보이게 조정 */
+    
+    /* 눈금 막대도 중앙을 기준으로 회전해야 함 */
+    transform-origin: 50% 50%; 
 }
 
-.end21{
-    display: flex;
-    position: relative;
-    justify-content: center;
-    margin: 0 auto;
-    width: 35%;
-    height: auto;
-    margin-top: 20px;
-    margin-bottom: 100px;
+.dial-tick-line.major-tick {
+    width: 3px;
+    height: 22px;
+    border-radius: 20%;
+}
+
+/*핀포스트 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.pinpost-bg {
+  width: 100%;
+  height: auto;
+}
+
+.bg-black{
+  width: 100%;
+  height: 852px;
+  background-image:linear-gradient(to bottom,
+    rgba(4, 4, 4, 0.0), rgba(7, 7, 7, 0.34), rgba(19, 19, 19, 0.92));
+}
+
+.pinpost-top {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 68px;
+  margin-left: 16px;
+  width: 361px;
+  height: 30px;
+}
+
+.profileEdit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 87px;
+  height: 30px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 22px 0 rgba(0, 0, 0, 0.1);
+}
+
+.rute-box {
+  display: flex;
+  justify-content: center;
+  width: 361px;
+  height: 198px;
+  margin-top: 18px;
+  margin-left: 16px;
+}
+
+.date-box{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  margin-top: 18px;
+  margin-left: 16px;
+}
+
+.date-first{
+  display: flex;
+  align-items: center;
+  width: 154px;
+  height: 33px;
+  font-size: 28px;
+  color: #fff; 
+}
+
+.date-heart{
+  display: flex;
+  align-items: center;
+  margin-left: 157px;
+  font-size: 16px;
+  color: #fff;
+}
+
+.date-sceond{
+  display: flex;
+  align-items: center;
+  font-size: 28px;
+  color: #A6A6A6; 
+}
+
+.pinpost-text{
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: 220px;
+  margin-top: 12px;
+  margin-left: 16px;
+  color: #fff;
+  border-radius: 25px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.pinpost-location{
+display: flex;
+color: #fff;
+font-size: 20px;
+}
+
+.pinpost-hashtagbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 16px;
+  color: #fff;
+}
+
+.pinpost-hashtag{
+  display: flex;
+  width: 115px;
+  height: 47px;
+  margin-top: 10px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.mypin-all{
+  display: flex;
+  align-items: center;
+  margin-top: 64px;
+  margin-left: 16px;
+  width: 361px;
+  height: 34px;
+}
+
+.mypin-allbox{
+  display: flex;
+  justify-content: space-between;
+  width: 361px;
+  height: auto;
+  padding-bottom: 12px;
+}
+
+.mypin-box{
+  display: flex;
+  position: relative;
+  width: 176px;
+  height: 176px;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.mypin-box img {
+  width: 100%; /* 부모의 가로 길이를 채웁니다. */
+  height: 100%; /* 부모의 세로 길이를 채웁니다. */
+  object-fit: cover; /* 이미지가 잘리더라도 부모 영역을 모두 덮도록 조정 */
+}
+
+.mypin-alldate{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  width: 78px;
+  height: 24px;
+  margin-top: 10px;
+  margin-left: 89px;
+  font-size: 14px;
+  color: #fff;
+  border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.17);
+}
+/*핀끌 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+.pinggle-bg{
+  background: url("/src/img/pinggle_bg.png");
+  width: 100%;
+  height: 100%;
+}
+
+.pinggleBg-bg{
+  background: url("/src/img/pinggle/influencer_box.png");
+  width: 100%;
+  height: 100%;
+}
+
+.top-bg {
+  width: 100%;
+  height: 214px;
+  background-image:linear-gradient(to bottom,
+    rgba(4, 4, 4, 0.48), rgba(19, 19, 19, 0.48), rgba(7, 7, 7, 0.25), rgba(0, 0, 0, 0));
+}
+
+.icongroup {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: absolute;
+  width: 42px;
+  height: 104px;
+  left: 315px;
+  top: 92px
+}
+
+.bgicon, .editicon {
+  display: flex;
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  justify-content: center;
+  align-items: center;
+}
+
+.character-box {
+ display: flex;
+ width: 264px;
+ height: 322px;
+ margin-top: 162px;
+ margin-left: 64.5px;
+}
+
+.pinggle-profile{
+  display: flex;
+  position: absolute;
+  top: 92px;
+  left: 16px;
+  width: 42px;
+  height: 42px;
+  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  justify-content: center;
+  align-items: center;
+}
+
+.pinggle-itembox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 329px;
+  height: 145px;
+  padding: 0 16px;
+  margin-top: 48px;
+  margin-left: 16px;
+}
+
+.pinggle-item{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 155px;
+  height: 145px;
+}
+
+/*프로필 페이지 스타일
+----------------------------------------------------------------------------------------------- */
+/*공통*/
+
+.profile-bg {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-top {
+  display: flex;
+  width: 361px;
+  height: 32px;
+  margin-top: 76px;
+  margin-left: 16px;
+  justify-content: space-between;
+}
+
+.peed-detail{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 37px 30px;
+  width: 333px;
+  height: 248px;
+  margin-top: 422px;
+  border-radius:  30px 30px 0px 0px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  z-index: 1000;
+}
+
+.profile-first {
+  display: flex;
+  width: 361px;
+  height: 80px;
+  margin-left: 16px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 8px;
+}
+
+.friend-box {
+  display: flex;
+  width: 90px;
+  height: 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  margin-bottom: 2px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.friend-peed{
+  display: flex;
+  width: 76px;
+  height: 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-left: 172px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-size: 12px;
+  color: #fff;
+}
+
+.profile-peed{
+  display: flex;
+  width: 90px;
+  height: 30px;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-left: 158px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-size: 12px;
+  color: #fff;
+}
+
+.profile-box {
+  display: flex;
+  flex-direction: column;
+  width: 361px;
+  height: 188px;
+  margin-left: 16px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  font-family: Pretendard;
+
+}
+
+.text-first {
+  display: flex;
+  margin-top:20px;
+  margin-left: 20px;
+  font-size: 28px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.text-second {
+  display: flex;
+  margin-top: 4px;
+  margin-left: 20px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(238, 235, 235, 0.5);
+
+}
+
+.text-third {
+  display: flex;
+  margin-top: 24px;
+  margin-left:20px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.profile-iconbox{
+  display: flex;
+  width: 321px;
+  height: 21px;
+  margin-left: 20px;
+  margin-top: 12px;
+}
+
+.profile-icon {
+  display: flex;
+  color: #fff;
+  font-family: Pretendard;
+  margin-right: 25px;
+}
+
+.hidden-radio {
+  /* 접근성을 유지하며 시각적으로만 숨깁니다. */
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  /* 키보드 포커스가 가능하게 하려면, 완전히 display: none은 피해야 합니다. */
+}
+
+/* 2. 커스텀 라벨 기본 스타일 */
+.custom-radio-label {
+  display: inline-block;
+  padding-left: 40px; /* 커스텀 원이 들어갈 공간 확보 */
+  position: relative;
+  cursor: pointer;
+  user-select: none; /* 텍스트 선택 방지 */
+  color: #fff;
+  font-size: 20px;
+}
+
+/* 3. ::before 가상 요소: 바깥 원(테두리) 역할 */
+.custom-radio-label::before {
+  content: "";
+  display: block;
+  width: 24px;
+  height: 24px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  border-radius: 50%; /* 원형 모양 */
+  
+  /* label 왼쪽의 원하는 위치에 배치 */
+  position: absolute; 
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.2s ease-in-out; /* 부드러운 전환 효과 */
+}
+
+/* 4. ::after 가상 요소: 내부 점(dot) 역할 */
+.custom-radio-label::after {
+  content: "";
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #7FFF6C;
+  box-shadow: inset 1px 1px 1px 1px rgba(255, 192, 192, 0.3), inset 0px 0px 1px 1px rgba(0, 0, 0, 0.4);
+  /* ::before (바깥 원) 중앙에 배치 */
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  
+  /* 기본적으로는 숨기고, scale을 0으로 설정하여 사라지게 합니다. */
+  transform: translateY(-50%) scale(0);
+}
+
+/* 내부 점 스타일 변경 (체크 시 보이게 scale을 1로 변경) */
+.hidden-radio:checked + .custom-radio-label::after {
+  transform: translateY(-50%) scale(1); /* 크기를 키워서 보이게 함 */
+}
+
+.three-box {
+  display: flex;
+  justify-content: space-between;
+  width: 361px;
+  height: 80px;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+.min-box{
+  display: flex;
+  flex-direction: column;
+  width: 115px;
+  height: 80px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.min-icon{
+  display: flex;
+  margin-top: 18px;
+  margin-left: 15px;
+  width: 93px;
+  height: 24px;
+}
+
+.friend-title {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  height: auto;
+  width: 120px;
+  margin-left: 97px;
+}
+
+.friend-topbutton{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  width: 84px;
+  height: 38px;
+  margin-left: 36px;
+}
+
+.friend-name{
+  display: flex;
+  width: 60px;
+  height: auto;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.circle-big{
+  display:flex;
+  position:relative;
+  align-items:center;
+  justify-content: center;
+  width:12px;
+  height:12px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.circle-small{
+  position:absolute;
+  width:8px;
+  height:8px; 
+  border-radius:8px
+}
+
+.condition{
+  display: flex;
+  width: 45px;
+  height: auto;
+  font-size: 12px;
+  font-weight: 300;
+  margin-left: 5px;
+}
+
+.left-box{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 58px;
+  height: 60px;
+  background-color: #7FFF6C;
+  border-radius: 0 8px 8px 0px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.right-box{
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 60px;
+  color: #fff;
+  border-radius: 8px 0 0px 8px;
+  font-size: 16px;
+  font-weight: 500;
 }
