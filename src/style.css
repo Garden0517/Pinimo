@@ -53,9 +53,9 @@ html, body, #root {
 .glass-card {
   display: flex;
   height: 36px;
-  left: 32px;
+  left: 45px;
   position: absolute;
-  top:7px;
+  top:8px;
 }
 
 /*전체 박스 글래스 스타일
