@@ -150,7 +150,7 @@ const [platformTexts, setPlatformTexts] = useState(initialPlatformTexts);
             <div className="under-box">
                 <div className="under-bar"></div>
                 <div className="under-bar"></div>
-                <div className="under-bar"></div>
+                <div className="under-bar1"></div>
             </div>
         </div>
 
