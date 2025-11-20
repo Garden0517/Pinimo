@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 import useMapInteraction from "./useMapInteraction"; // 🔥 훅 임포트
 // 🚨 이미지 경로는 실제 프로젝트 구조에 맞게 수정해주세요.
 import Map from "./img/map/map.png"
@@ -40,10 +41,26 @@ function PinmapLike({ onSwipeLeft, onSwipeRight }) {
         setIsRouteVisible(prev => !prev);
     }
 
+    const navigate = useNavigate();
+
+    // 왼쪽 영역 터치 시 실행될 함수
+    const goToPreviousPage = () => {
+        // 💡 navigate 함수에 이동할 리액트 라우트 경로를 전달
+        // 'previous_page.html' 대신, 라우터에 정의된 경로를 사용합니다.
+        navigate('/Pinmap'); 
+    };
+
+    // 오른쪽 영역 터치 시 실행될 함수
+    const goToNextPage = () => {
+        navigate('/Pinmap');
+    };
+
     // ----------------- JSX 렌더링 (기존 코드 유지) -----------------
     return (
         <>
                 <div className="container" style={{ width: '100%', height: '100%', position: 'relative' }}>
+                    <div id="left-touch-area" style={{width:"10%", height:"70%", position:"absolute", zIndex:'480', bottom:"0"}} onClick={goToPreviousPage}></div>
+                    <div id="right-touch-area" style={{width:"10%", height:"70%", position:"absolute", zIndex:'480', right: '0', bottom:"0"}} onClick={goToNextPage}></div>
                     <div 
                     className="pinmap-bg"
                     ref={containerRef}

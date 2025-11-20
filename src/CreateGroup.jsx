@@ -167,7 +167,7 @@ function CreateGroup(props) {
                     <div onClick={handleCreate} className="glass" style={{width:"57px", height:"38px", display:"flex", alignItems:"center", justifyContent:"center",color:"#fff", fontSize:"17px",borderRadius:"8px", backgroundColor: '#2C2C2C'}}>생성</div>
                 </div>
 
-                <p style={{color: '#A1A1A1', fontSize: '14px', marginTop: '5px'}}>그룹을 생성하여 친구 목록을 쉽게 관리해보세요</p>
+                <p style={{color: '#A1A1A1', fontSize: '14px', marginTop: '10px'}}>그룹을 생성하여 친구 목록을 쉽게 관리해보세요</p>
                 
                 {/* 기존 그룹 목록 (예시) */}
                 <div className="existing-groups-section" style={{borderBottom:"1px #fff solid", paddingBottom:"6px", width:"361px"}}>

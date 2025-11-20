@@ -13,12 +13,12 @@ function Nav() {
    return (
     <>
       <div className='glass-screen'>
-        <div className='glass-card'>
+        <div className='glass-card' style={{display:"flex", alignItems:"flex-end"}}>
           <nav>
             <Link to="/pined"><img src={PinedIcon} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}          
             <Link to="/Pinmap"><img src={PinmapIcon} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}
             {/* <Link to="/PinmapWrapper"><img src={PinmapIcon} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "} */}
-            <Link to="/pincreate"><img src={Pincreate} style={{width: '36px', height: '36px', paddingRight: '35px'}}/></Link>{" "}
+            <Link to="/pincreate"><img src={Pincreate} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}
             <Link to="/mypin"><img src={Mypin} style={{width: '24px', height: '24px', paddingRight: '35px'}}/></Link>{" "}
             <Link to="/pinggle"><img src={Pinggle} style={{width: '24px', height: '24px',}}/></Link>{" "}
           </nav>

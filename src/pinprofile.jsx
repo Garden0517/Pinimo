@@ -19,7 +19,7 @@ import Arrow from "./img/arrowIcon.png"
 function pinprofile() {
     return (
         <>
-            <div className="profile-bg" style={{backgroundImage: `url(${Bg})`}}>
+            <div className="profile-bg" style={{backgroundImage: `url(${Bg})`, backgroundSize:"cover"}}>
                 <div className="profile-top">
                     <img src= {Logo}/>
                     <img src= {Bell} style={{width: "24px", height: "24px"}}/>

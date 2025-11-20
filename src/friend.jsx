@@ -148,8 +148,8 @@ function SwipeableFriendItem({ friend, SWIPE_WIDTH_LEFT, SWIPE_WIDTH_RIGHT }) {
                         flexShrink: 0
                     }}
                 >
-                    <div className="right-box" style={{backgroundColor:"#6D6D6D"}}>친구<br/>숨김</div>
-                    <div className="right-box" style={{backgroundColor:"#FF830F", zIndex:"50", marginLeft:"58px"}}>친구<br/>차단</div> 
+                    {/* <div className="right-box" style={{backgroundColor:"#6D6D6D"}}>친구<br/>숨김</div>
+                    <div className="right-box" style={{backgroundColor:"#FF830F", zIndex:"50", marginLeft:"58px"}}>친구<br/>차단</div>  */}
                     <div className="right-box" style={{backgroundColor:"#F53D20", zIndex:"100", marginLeft:"116px"}}>친구<br/>삭제</div> 
                 </div>
             </div>

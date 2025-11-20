@@ -11,6 +11,10 @@ import Profile from './img/profile.png'
 import BgIcon from "./img/bgIcon.png";
 import EditIcon from "./img/editIcon.png";
 
+import Img from "./img/pinggle/1.png";
+
+// import { HouseModel } from './Influencer.jsx';
+
 function Pinggle() {
     return (
         <>
@@ -23,27 +27,21 @@ function Pinggle() {
                     </div>
                 </div>
                 <div className="character-box">
-                    <Canvas 
-                        shadows // 그림자 활성화
-                        camera={{ position: [5, 5, 5], fov: 50 }} // 카메라 위치와 시야각 설정
-                    >
-                        {/* 모델 로딩이 완료될 때까지 fallback 컨텐츠를 보여줍니다. */}
-                        <Suspense fallback={null}>
+                    <img src={Img}/>
+                    {/* <Canvas camera={{ position: [20, 5, -8] }}>
+        
+                    <OrbitControls />
+                    <ambientLight intensity={1} />
                         
-                            {/* 환경 라이팅(Environment Lighting) 설정 */}
-                            <Environment preset="sunset" background /> 
-
-                            {/* 광원 추가 (필요에 따라) */}
-                            <ambientLight intensity={0.5} />
-                            <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} castShadow />
-
-                            {/* GLTF 모델 컴포넌트 */}
-                            <Alcohol position={[0, 0, 0]} scale={1} />
-
-                            {/* 마우스/터치로 씬을 회전, 확대/축소할 수 있게 해주는 컨트롤러 */}
-                            <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
-                        </Suspense>
-                    </Canvas>
+                    {/* 👈 2. 가져온 컴포넌트를 일반 태그처럼 사용합니다. */}
+                    {/* props를 통해 위치, 회전, 크기 등을 전달할 수 있습니다.
+                    <HouseModel 
+                        position={[0, 0, 0]} 
+                        rotation-y={-Math.PI / 2} 
+                        scale={10} // 크기가 작으면 이렇게 scale을 조정할 수 있습니다.
+                    />
+                        
+                    </Canvas> */}
                 </div>
             </div>
         </>
